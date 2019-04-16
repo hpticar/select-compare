@@ -1,0 +1,122 @@
+********************************************************************************
+***  Script Code : S-READ-RECORD
+***  Description : Read Record from PMSL (Update Details)
+***
+***  Created By  : Hrvoje Pticar On 25/02/15 @ 10:42:33
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF05=PI01] Has to be "True" to download attachments!
+
+[&Assign LF205=REC06]
+[&If LF205 &Begins "AVL"]
+   [&Assign LF205="AVL"]
+[&Else]
+   [&Assign LF205=LF205:caps:word(last=1)]
+[&EndIf]
+
+[&SelectEntity type="ADMI",ref="myADMI"]
+[&Assign LF23=myADMI.SYS03]
+[&Assign LF24=myAdmi.SYS08+"\VFILE\"+LF23+"\Transom\Incoming\Attachments"]
+[&Assign LF99=myAdmi.SYS08+"\VFILE\"+LF23+"\Logs\PMSL Read Record Calls.txt"]
+
+[&Call SYSTEM.SS-TRANSOM-REQUEST,input="GetRecord",input=REC01,input="",input="",input=LF205,input=LF05,input=LF24,output=LF204,output=LF201]
+[&Out LF99:date+"|"+time(seconds)+"--------------------",append]
+[&Out LF99:LF201,append]
+[&Request wsdl=LF204,service="wsTransomConnect",port="wsTransomConnectSoap",operation="GetRecord",request=LF201,response=XL03]
+[&Assign REC14=XL03]
+[&Assign REC17=date]
+[&Assign REC18=time]
+[&Assign REC20=US02]
+[&Select xl,type=XL03,element=GetRecordResponse.GetRecordResult,first,parent]
+[&Assign REC10=XL03(element=status,child)]
+
+[&Out LF99:XL03,append]
+
+[&Select xl,type=XL03,element=GetRecordResponse.GetRecordResult._embedded.RecordDocumentApi.RecordDocumentApiModel,first,parent]
+[&DoWhile status(select)=""]
+   [&Assign LF01=XL03(element=RecordDocumentId,child)]
+   [&Assign LF02=""] record exists already?
+   [&ForEach ATTG,ATT01=LF01,noincludeall]
+      [&Assign LF02="Exists"]
+   [&EndFor]
+   [&If LF02=""]
+      [&Select ATTG:new]
+      [&Assign ATT01=LF01]
+      [&Assign ATT02=XL03(element=name,child)]
+      [&Assign ATT03=XL03(element=ContentType,child)]
+      [&Assign ATT04=XL03(element=_links.rawStream.href,child)]
+   [&EndIf]
+   [&Select xl,type=XL03,element=GetRecordResponse.GetRecordResult._embedded.RecordDocumentApi.RecordDocumentApiModel,next,parent]
+[&EndDoWhile]
+
+[&Select xl,type=XL03,element=GetRecordResponse.GetRecordResult._embedded.NoteApi.NoteApiModel,first,parent]
+[&DoWhile status(select)=""]
+   [&Assign LF01=XL03(element=NoteId,child)]
+   [&Assign LF02=""] record exists already?
+   [&ForEach NOTG,NOT01=LF01,noincludeall]
+      [&Assign LF02="Exists"]
+   [&EndFor]
+   [&If LF02=""]
+      [&Select NOTG:new]
+      [&Assign NOT01=LF01]
+      [&Assign LF03=XL03(element=dateEntered,child)]
+      [&Assign LF05=char(LF03,first=12,number=5)]
+      [&Assign LF04=char(LF03,number=10)]
+      [&Call SYSTEM.SS-DATE-CONVERT,input=LF04,output=LF04]
+      [&Assign NOT02=LF04]
+      [&Assign NOT03=LF05]
+      [&Assign NOT04=XL03(element=Body,child)]
+      [&Assign NOT05=XL03(element=_links.self.href,child)]
+   [&EndIf]
+   [&Select xl,type=XL03,element=GetRecordResponse.GetRecordResult._embedded.NoteApi.NoteApiModel,next,parent]
+[&EndDoWhile]
+
+[&Select xl,type=XL03,element=GetRecordResponse.GetRecordResult._embedded.WorkflowApi.WorkflowApiModel,first,parent]
+[&DoWhile status(select)=""]
+   [&Assign LF01=XL03(element=name,child)]
+   [&Assign LF02=""]
+   [&ForEach WRKG,WRK02=LF01,noincludeall,leave-field=LF02]
+      [&Assign LF02="exists"]
+   [&EndFor]
+   [&If LF02=""]
+      [&Select WRKG:new]
+      [&Assign WRK01=XL03(element=WorkflowId,child)]
+      [&Assign WRK02=LF01]
+      [&Assign WRK03=XL03(element=_links.Execute.href,child)]
+   [&EndIf]
+   [&Select xl, type=XL03,element=GetRecordResponse.GetRecordResult._embedded.WorkflowApi.WorkflowApiModel,next,parent]
+[&EndDoWhile]
+
+[&DeleteRole type="PMSLRETRIEVED"]
+[&DeleteRole type="PMSLNEW"]
+[&DeleteRole type="PMSLACCEPT"]
+[&DeleteRole type="PMSLPAID"]
+[&DeleteRole type="PMSLREJECT"]
+[&DeleteRole type="PMSLREJECTED"]
+[&DeleteRole type="PMSLAWAITINGPROCESSING"]
+
+[&If REC10="Pending Validation"]
+   [&CreateRole type="PMSLRETRIEVED"]
+[&EndIf]
+[&If REC10="Awaiting Claims Validation"]
+   [&CreateRole type="PMSLNEW"]
+[&EndIf]
+[&If REC10="Pending Payment"]
+   [&CreateRole type="PMSLACCEPT"]
+[&EndIf]
+[&If REC10 &Begins "Paid"]
+   [&CreateRole type="PMSLPAID"]
+[&EndIf]
+[&If REC10="Rejected"]
+   [&CreateRole type="PMSLREJECTED"]
+[&EndIf]
+
+[&Assign PO01="Completed"]
+
+********************************************************************************
+***   End of Script
+********************************************************************************
