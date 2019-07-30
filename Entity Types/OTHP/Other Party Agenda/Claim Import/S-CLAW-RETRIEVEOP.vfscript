@@ -1,0 +1,33 @@
+********************************************************************************
+***  Script Code : S-CLAW-RETRIEVEOP
+***  Description : CLAW Retrieve OP Information
+***
+***  Created By  : Hrvoje Pticar On 29/07/15 @ 13:55:18
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+GF116 = root folder for TP currently being imported
+
+[&Out GF113:date+"|"+time(seconds)+"|INFO|OTHP.S-CLAW-RETRIEVEOP|Claim GUID: "+GF112+"|---Starting OP details import.",append]
+
+[&Call S-CLAW-IMPORT-OPINSURER]
+[&Call S-CLAW-IMPORT-OPVEHICLE]
+[&Call S-CLAW-IMPORT-OPVEHOWNER]
+[&Call S-CLAW-IMPORT-OPVEHDAMAGE]
+[&Call S-CLAW-IMPORT-OPVEHLOC]
+[&Call S-CLAW-IMPORT-OPDRIVER]
+[&Call S-CLAW-IMPORT-OPINJURIES]
+[&Call S-CLAW-IMPORT-OPSOLS]
+[&Call S-CLAW-IMPORT-OPREPS]
+[&Call S-CLAW-IMPORT-OPHIREPROVIDER]
+[&Call S-CLAW-IMPORT-OPPROPERTY]
+[&Call S-CLAW-IMPORT-OPSYSTEM]
+[&Call S-CLAW-IMPORT-VRU]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

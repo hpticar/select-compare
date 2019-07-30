@@ -1,0 +1,37 @@
+********************************************************************************
+***  Script Code : S-OPS-OPS21
+***  Description : Change OP Reps Capacity
+***
+***  Created By  : Charlie Smith On 24/11/17 @ 11:35:07
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF01='Choose OP Reps capacity'(Choose
+"AMC":
+"CMC":
+"Counsel":
+"Credit Hire Company":
+"Involvement Broker":
+"Involvement Repairer":
+"Legal Guardian":
+"Medical Agency":
+"Medical Examiner":
+"Parent":
+"Recovery Company":
+"Salvage Company":
+"Storage Company":
+"Treatment Provider":
+"ULR Firm":
+"Other":
+"Cancel")]
+
+[&If LF01<>"Cancel"]
+   [&Assign OPS21=LF01]
+[&EndIf]
+
+********************************************************************************
+***   End of script
+********************************************************************************

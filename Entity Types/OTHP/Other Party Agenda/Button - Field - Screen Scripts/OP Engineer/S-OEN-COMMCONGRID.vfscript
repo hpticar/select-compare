@@ -1,0 +1,122 @@
+********************************************************************************
+***  Script: S-OEN-COMMCONGRID                                               ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: HP On 18/09/13                                              ***
+********************************************************************************
+
+** Initialise the temporary variables to be used in this script
+[&Assign LF01=0] ** Count of grid items
+[&Assign LF02=""] ** Stores response from grid   
+[&Assign LF03=""] ** Stores result from grid       
+[&Assign LF04=OEN19] ** Stores EN02 of current contact (if any)
+[&Assign LF05=OEN18] ** Stores EN02 of current office (if any)
+
+[&SelectRelation relation-field=OEN01,ref="myCOMM"]
+[&SelectRelation relation-field=OEN18,ref="myOFFI"]
+
+[&Assign LF06=myOFFI.OFF01] ** Stores office name (if any)
+[&Assign LF07=0] ** Stores int-code (EN56) of office
+
+[&Grid action="delete"]
+[&Grid action="create"]
+
+** Create the columns for the grid
+** Note: The Key field is the field returned when a user selects an item
+[&Grid action="create-col",name="Name",format="X(25)",type="char"]
+[&Grid action="create-col",name="Job Title",format="X(60)",type="char"]
+[&Grid action="create-col",name="Current Contact (*)",format="X(20)",type="char"]
+[&Grid action="create-col",name="KEY",format="X(10)",type="char",hidden,key]
+
+[&With myCOMM]
+   [&ForEach EMPLOYED_EMPLOYED,noincludeall]
+      [&If LF05=EMPLOYED_EMPLOYED.EMPLOYADD_OFFI.EN02]
+         
+         ** AJ - 19/05/2014 @ 15:19
+         ** ITSS-DEV-000156 - Added EMP20 Availability Filter for Selection.
+    
+         [&If EMPLOYED_EMPLOYED.EMP20<>"Not Available"] 
+            
+            ** EMPLoyee is employed at the selected OFFIce
+            [&Grid action="create-row"]
+            [&Assign GR01=EMPLOYED_EMPLOYED.EMPLOYMENT_INDI.NAM11] ** Contact Name
+            [&Assign GR02=EMPLOYED_EMPLOYED.EMP01] ** Job Title
+            [&If LF04=EMPLOYED_EMPLOYED.EN02] ** Current Contact
+               [&Assign GR03="*"]
+            [&Else]
+               [&Assign GR03=""]
+            [&EndIf]
+            [&Assign GR04=EMPLOYED_EMPLOYED.EN56] ** Contact in code
+            [&Assign LF01=LF01+1]
+         [&EndIf]
+      [&EndIf]
+   [&EndFor]
+[&EndWith]
+
+[&If LF01>0]
+   [&If LF01>20]
+      [&Assign LF01=20]
+   [&EndIf] ** Other Correspondents has contacts
+   [&Grid action="display",button1="Cancel",button2="Select",button3="New",button4="Open",button5="Clear",default="2",title="Employees of office: "+LF06,rows=LF01,response=LF02,result=LF03]
+   [&If LF02="BUTTON2" &Or LF02="GO"] ** Select contact
+      [&SelectEntity int-code=LF03,ref="myEMPL"]
+
+      [&DeleteRelation relation-field=OEN19]
+      [&CreateRelation relation-field=OEN19,to-ref="myEMPL"] ** Create the relation from this party to the EMPLoyee
+   [&Else]
+      [&If LF02="BUTTON3"] ** Add new contact to commercial
+         // Disabled creating new engineers! HP - 31/05/2017
+         [&Message "You cannot add a new engineer."]
+         [&Quit]
+                  
+         [&SelectRelation relation-field=OEN18,ref="myOFFI"]
+         [&Assign LF07=myOFFI.EN56:text]
+         [&With myCOMM]
+            [&Assign TF738876=""] ** Initialise the return parameter
+            [&Call NEWEMPLINDI,input=LF07] ** Call a script on the COMM to add a new EMPLoyment record, passing the selected OFFIce to be set as the employment office
+         [&EndWith]
+         [&SelectEntity int-code=TF738876,ref="myEMPL"] ** Select the newly created OFFIce from the return variable (TFRETURN) from called script
+         [&Assign TF738876=""] ** Reset the return parameter
+         [&DeleteRelation relation-field=OEN19]
+         [&CreateRelation relation-field=OEN19,to-ref="myEMPL"] ** Create the relation from this party to the EMPLoyee
+      [&Else]
+         [&If LF02="BUTTON4"] ** Open the contact record
+            [&SelectEntity int-code=LF03,ref="myEMPL"]
+            [&With myEMPL]
+               [&Open]
+               [&Quit]
+            [&EndWith]
+         [&Else]
+            [&If LF02="BUTTON5"] ** Clear contact from matter
+               [&DeleteRelation relation-field=OEN19]
+               [&SelectEntity int-code=LF03,ref="myEMPL"]
+            [&EndIf]
+         [&EndIf]
+      [&EndIf]
+   [&EndIf]
+[&Else] ** Other party has no contacts
+   [&Grid action="display",button1="Cancel",button2="New",default="2",title="There are no employees of office: "+LF06,rows=LF01,response=LF02,result=LF03]
+   [&If LF02="BUTTON2" &Or LF02="GO"] ** Add new contact
+      // Disabled creating new engineers! HP - 31/05/2017
+      [&Message "You cannot add a new engineer."]
+      [&Quit]
+               
+      [&SelectRelation relation-field=OEN18,ref="myOFFI"]
+      [&Assign LF07=myOFFI.EN56:text]
+      [&With myCOMM]  
+         [&Assign TF738876=""] ** Initialise the return parameter
+         [&Call NEWEMPLINDI,input=LF07] ** Call a script on the COMM to add a new EMPLoyment record, passing the selected OFFIce to be set as the employment office
+      [&EndWith]
+      [&SelectEntity int-code=TF738876,ref="myEMPL"] ** Select the newly created OFFIce from the return variable (TFRETURN) from called script
+      [&Assign TF738876=""] ** Reset the return parameter
+      [&DeleteRelation relation-field=OEN19]
+      [&CreateRelation relation-field=OEN19,to-ref="myEMPL"] ** Create the relation from this party to the EMPLoyee
+   [&EndIf]
+[&EndIf]
+
+[&Grid action="delete"] 
+
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

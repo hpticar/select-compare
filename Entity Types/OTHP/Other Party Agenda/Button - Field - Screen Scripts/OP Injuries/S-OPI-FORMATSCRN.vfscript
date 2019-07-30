@@ -1,0 +1,79 @@
+********************************************************************************
+***  Script: S-OPI-FORMATSCRN                                                ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: HP On 03/05/13                                              ***
+********************************************************************************
+
+*** Enable / Disable screen Buttons as required plus change static image.
+
+[&If SYS03 &IsOneOf "Witness,Pedestrian,Cyclist,PropertyOwner"]
+   [&Field code="OPI02",attribute="visible",value="No"] Wearing seatbelt?
+[&EndIf]
+
+[&If OPI01="Yes"]
+   [&Field code="OPI02",attribute="Read-Only",value="No"]
+   [&Field code="OPI03",attribute="Read-Only",value="No"]
+   [&Field code="OPI04",attribute="Read-Only",value="No"]
+   [&Field code="OPI06",attribute="Read-Only",value="No"]
+   [&Field code="OPI07",attribute="Read-Only",value="No"]
+   [&Field code="OPI08",attribute="Read-Only",value="No"]
+   [&Field code="OPI09",attribute="Read-Only",value="No"]
+   [&Field code="OPI10",attribute="Read-Only",value="No"]
+   [&Field code="OPI11",attribute="Read-Only",value="No"]
+   [&Field code="OPI12",attribute="Read-Only",value="No"]
+   [&Field code="OPI13",attribute="Read-Only",value="No"]
+   [&Field code="OPI14",attribute="Read-Only",value="No"]
+   [&Field code="OPI15",attribute="Read-Only",value="No"]
+   [&Field code="OPI16",attribute="Read-Only",value="No"]
+   [&Field code="OPI17",attribute="Read-Only",value="No"]
+   [&Field code="OPI18",attribute="Read-Only",value="No"]
+   [&Field code="OPI19",attribute="Read-Only",value="No"]
+   [&Field code="OPI20",attribute="Read-Only",value="No"]
+   [&Field code="OPI21",attribute="Read-Only",value="No"]
+   [&Field code="OPI22",attribute="Read-Only",value="No"]
+   [&Field code="OPI23",attribute="Read-Only",value="No"]
+   [&Field code="OPI24",attribute="Read-Only",value="No"]
+   [&Field code="OPI25",attribute="Read-Only",value="No"]
+   [&Field code="OPI26",attribute="Read-Only",value="No"]
+   [&Field code="OPI27",attribute="Read-Only",value="No"]
+   [&Field code="OPI05",attribute="Image",value="lnimg\haven\Human_White.jpg"]
+   [&Field code="OPI28",attribute="Read-Only",value="No"]
+   [&Field code="OPI29",attribute="Read-Only",value="No"]  
+[&Else]
+   [&Field code="OPI02",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI03",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI04",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI06",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI07",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI08",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI09",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI10",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI11",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI12",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI13",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI14",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI15",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI16",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI17",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI18",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI19",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI20",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI21",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI22",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI23",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI24",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI25",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI26",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI27",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI05",attribute="Image",value="lnimg\haven\Human_Grey.jpg"]
+   [&Field code="OPI28",attribute="Read-Only",value="Yes"]
+   [&Field code="OPI29",attribute="Read-Only",value="Yes"]
+[&EndIf]
+
+
+   [&Field code="OPI28",attribute="visible",value="No"]
+   [&Field code="OPI29",attribute="visible",value="No"]  
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

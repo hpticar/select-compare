@@ -1,0 +1,31 @@
+********************************************************************************
+***  Script Code : S-CLAW-IMPORT-OPSYSTEM
+***  Description : CLAW Import OP System Data
+***
+***  Created By  : Hrvoje Pticar On 30/07/15 @ 14:35:20
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF88=GF116+"\SYSTEM.XML"]
+[&Assign LF87="search('"+LF88+"')":proval]
+[&If LF87<>""] file exists
+   [&Out GF113:date+"|"+time(seconds)+"|INFO|OTHP.S-CLAW-IMPORT-OPSYSTEM|Claim GUID: "+GF112+"|OP: "+EN02+"|---Importing SYSTEM.XML...",append]
+
+   [&Assign XL01(file)=LF88]
+   [&Assign OVD29=XL01(element=TPSystemFieldsExtended.InvolvementInHireVehicle)]
+   [&Assign SYS04=XL01(element=TPSystemFieldsExtended.ReportedAsMinor)]
+   [&Assign SYS05=XL01(element=TPSystemFieldsExtended.CRUExpiryDate)]
+   [&Assign FIL19=XL01(element=TPSystemFieldsExtended.IGIndicator)]
+   [&Assign SYS04=XL01(element=TPSystemFieldsExtended.ReportedAsMinor)]
+
+[&Else]
+   [&Out GF113:date+"|"+time(seconds)+"|ERROR|OTHP.S-CLAW-IMPORT-OPSOLS|Claim GUID: "+GF112+"|OP: "+EN02+"|SYSTEM.XML Does not exist. Skip.",append]
+[&EndIf]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

@@ -1,0 +1,38 @@
+********************************************************************************
+***  Script Code : S-GRSV-HIDE
+***  Description : Services offered group - HIDE
+***
+***  Created By  : Charlie Smith On 16/09/16 @ 16:24:06
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&Assign LF01=""]
+[&If US31<>"yes"]
+   [&ForEach ad,AD05="SCH-4DAY-INJURY-CHASER"]
+      [&Assign LF01="yes"]
+   [&EndFor]
+   [&If SRV12="Confirmed no injury" &And OSE07<>"yes" &And LF01<>"yes"]
+      [&SelectRelation type="OTHERPARTY_FILE",ref="myFile"]
+      [&With myfile]
+         [&Assign LF150="Make follow-up call to TP re are injury services required?"]
+         [&Assign LF153=date+4(days)]
+         [&Assign LF151=US02+" created "+LF05+", due-date="+LF153+", priority=Critical"+", handler="+US02]
+         [&Schedule S-WF-REMINDER,LF150,comments=LF151,date-due=LF153,schedule-code="SCH-4DAY-INJURY-CHASER"]
+         [&Call S-DATETIME-STAMP,output=LF152]
+         [&Assign LF152="
+"+LF152+" "+LF151]
+         [&History "SCHEDULE created: "+LF05;LF152,user-data1="ScheduleManagement",category="Schedule Management"]
+      [&EndWith]
+      [&Assign OSE07="yes"]
+   [&EndIf]
+   [&DoWhile SRV13="" &Or SRV13="Select..."]
+      [&Message "You must note what OP details were available"]
+      [&Show SRV:13]
+   [&EndDoWhile]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

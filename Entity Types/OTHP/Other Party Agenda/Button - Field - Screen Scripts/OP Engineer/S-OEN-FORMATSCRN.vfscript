@@ -1,0 +1,40 @@
+********************************************************************************
+***  Script: S-OEN-FORMATSCRN                                                ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: HP On 18/09/13                                              ***
+********************************************************************************
+
+[&SelectRelation relation-field="OEN01",ref="scope"]
+[&If scope.EN06="COMM"]    *** Commercial engineer
+   [&Field code="OEN08",attribute= "visible",value = "Yes"] ** @Contact COMM
+   [&Field code="OEN04",attribute= "script",value = "S-OEN-COMMOFFIGRID"]
+   [&Field code="OEN09",attribute= "visible",value = "Yes"] ** Direct Dial
+   [&Field code="OEN10",attribute= "visible",value = "Yes"] ** Email employment pointer
+   [&Field code="OEN14",attribute= "visible",value = "Yes"] ** Mobile
+
+   [&Field code="OEN20",attribute= "visible",value = "No"] ** @Contact PRIV
+   [&Field code="OEN11",attribute= "visible",value = "No"] ** Private contact: Email
+   [&Field code="OEN12",attribute= "visible",value = "No"] ** Private contact: Daytime
+   [&Field code="OEN13",attribute= "visible",value = "No"] ** Private contact: Evening
+   [&Field code="OEN15",attribute= "visible",value = "No"] ** Private contact: Fax
+   [&Field code="OEN16",attribute= "visible",value = "No"] ** Private contact: Mobile
+[&Else]                        *** Private engineer
+   [&Field code="OEN08",attribute= "visible",value = "No"] ** @Contact PRIV
+   [&Field code="OEN04",attribute= "script",value = " "] ** Disable office script
+   [&Field code="OEN20",attribute= "visible",value = "Yes"] ** @Contact PRIV
+   [&Field code="OEN11",attribute= "visible",value = "Yes"] ** Email
+   [&Field code="OEN12",attribute= "visible",value = "Yes"] ** Daytime
+   [&Field code="OEN13",attribute= "visible",value = "Yes"] ** Evening
+   [&Field code="OEN15",attribute= "visible",value = "Yes"] ** Fax
+   [&Field code="OEN16",attribute= "visible",value = "Yes"] ** Mobile
+
+   [&Field code="OEN09",attribute= "visible",value = "No"] ** Commercial Contact: Direct Dial
+   [&Field code="OEN10",attribute= "visible",value = "No"] ** Commercial Contact: Email employment pointer
+   [&Field code="OEN14",attribute= "visible",value = "No"] ** Commercial Contact: Mobile
+[&EndIf]
+
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

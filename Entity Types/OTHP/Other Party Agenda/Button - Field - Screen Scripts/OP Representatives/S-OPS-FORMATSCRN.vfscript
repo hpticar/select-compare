@@ -1,0 +1,54 @@
+********************************************************************************
+***  Script: S-OPS-FORMATSCRN                                                ***
+***  Called By: S-OPS-VIEW, S-CREATE-CLIENT                                  ***
+***  Calls:                                                                  ***
+***  Created By: RRH On 04/01/13                                             ***
+********************************************************************************
+
+[&SelectRelation relation-field="OPS01",ref="scope"]
+
+** All fields free text, but labels need changing for essential fields, and some need hiding for private contacts
+[&If scope.EN06="COMM"]    *** Commercial OPS
+   [&Field code="OPS08",attribute="label",value="Main Contact"] ** @Contact COMM
+   [&Field code="OPS09",attribute="label",value="Direct Dial"]
+   [&Field code="OPS04",attribute="script",value="S-OPS-COMMOFFIGRID"]
+   [&Field code="OPS02",attribute="visible",value="yes"] ** Commercial name pointer
+   [&Field code="OPS03",attribute="visible",value="no"] ** Private name pointer
+   
+   [&Field code="OPS04",attribute="visible",value="Yes"] ** Commercial Office
+   [&Field code="OPS05",attribute="visible",value="Yes"] ** Commercial Switchboard
+   [&Field code="OPS06",attribute="visible",value="Yes"] ** Commercial Fax
+   
+   [&Field code="OPS11",attribute="visible",value="No"] ** Private Address
+   [&Field code="OPS12",attribute="visible",value="No"] ** Private Daytime
+   [&Field code="OPS07",attribute="visible",value="No"] ** Private Mobile
+   
+   [&Field code="OPS13",attribute="visible",value="No"] ** Private contact: Evening
+   [&Field code="OPS14",attribute="visible",value="No"] ** Private contact: Mobile
+   [&Field code="OPS15",attribute="visible",value="No"] ** Private Contact: Fax
+[&Else]                        *** Private OPS
+   [&Field code="OPS08",attribute="label",value="Contact"] ** @Contact PRIV
+   [&Field code="OPS09",attribute="label",value="Daytime"]
+   [&Field code="OPS04",attribute="script",value=" "]
+
+   [&Field code="OPS02",attribute="visible",value="no"] ** Commercial name pointer
+   [&Field code="OPS03",attribute="visible",value="Yes"] ** Commercial name pointer
+
+   [&Field code="OPS04",attribute="visible",value="No"] ** Commercial Office
+   [&Field code="OPS05",attribute="visible",value="No"] ** Commercial Switchboard
+   [&Field code="OPS06",attribute="visible",value="No"] ** Commercial Fax
+
+   [&Field code="OPS11",attribute="visible",value="Yes"] ** Private Address
+   [&Field code="OPS12",attribute="visible",value="Yes"] ** Private Daytime
+   [&Field code="OPS07",attribute="visible",value="Yes"] ** Private Mobile
+   
+   [&Field code="OPS13",attribute="visible",value="Yes"] ** Evening
+   [&Field code="OPS14",attribute="visible",value="Yes"] ** Mobile
+   [&Field code="OPS15",attribute="visible",value="Yes"] ** Fax
+[&EndIf]
+
+
+*** AMENDMENTS *****************************************************************
+RRH 2012-12-18 Recoded to OPS, reworked to use link labels rather than buttons
+
+  

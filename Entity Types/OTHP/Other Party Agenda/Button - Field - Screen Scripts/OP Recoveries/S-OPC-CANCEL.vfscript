@@ -1,0 +1,42 @@
+********************************************************************************
+***  Script Code : S-OPC-CANCEL
+***  Description : Cancel OPCovery Request
+***
+***  Created By  : Hrvoje Pticar On 27/06/14 @ 16:55:02
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&If OPC14="yes"]
+   [&Field code="OPC01",attribute="visible",value="no"]
+   [&Field code="OPC02",attribute="visible",value="no"]
+   [&Field code="OPC03",attribute="visible",value="no"]
+   [&Field code="OPC04",attribute="visible",value="no"]
+   [&Field code="OPC05",attribute="visible",value="no"]
+   [&Field code="OPC06",attribute="visible",value="no"]
+   [&Field code="OPC07",attribute="visible",value="no"]
+   [&Field code="OPC08",attribute="visible",value="no"]
+   [&Field code="OPC09",attribute="visible",value="no"]
+   [&Field code="OPC10",attribute="visible",value="no"]
+   [&Field code="OPC11",attribute="visible",value="no"]
+   [&Field code="OPC15",attribute="visible",value="yes"]
+[&Else]
+   [&Field code="OPC01",attribute="visible",value="yes"]
+   [&Field code="OPC02",attribute="visible",value="yes"]
+   [&Field code="OPC03",attribute="visible",value="yes"]
+   [&Field code="OPC04",attribute="visible",value="yes"]
+   [&Field code="OPC05",attribute="visible",value="yes"]
+   [&Field code="OPC06",attribute="visible",value="yes"]
+   [&Field code="OPC07",attribute="visible",value="yes"]
+   [&Field code="OPC08",attribute="visible",value="yes"]
+   [&Field code="OPC09",attribute="visible",value="yes"]
+   [&Field code="OPC10",attribute="visible",value="yes"]
+   [&Field code="OPC11",attribute="visible",value="yes"]   
+   [&Field code="OPC15",attribute="visible",value="no"]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

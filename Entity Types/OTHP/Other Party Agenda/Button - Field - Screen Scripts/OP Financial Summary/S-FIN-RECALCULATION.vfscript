@@ -1,0 +1,32 @@
+********************************************************************************
+***  Script Code : S-FIN-RECALCULATION
+***  Description : Financial Summary Recalculation
+***
+***  Created By  : John Wheeler On 11/02/19 @ 13:53:04
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF01=FIN01] PD Total Reserve 
+[&Assign LF02=FIN02] PD Total Paid
+[&Assign LF03=FIN03] PD Total Recovery Reserve
+[&Assign LF04=FIN04] PD Total Recovered
+[&Assign LF05=FIN06] PI Total Reserve
+[&Assign LF06=FIN07] PI Total Paid
+[&Assign LF07=FIN08] PI Total Recovery Reserve
+[&Assign LF08=FIN09] PI Total Recovered
+[&Assign LF09=(LF01+LF02)-(LF03+LF04)] PD Total Inccured (FIN05)
+[&Assign LF10=(LF05+LF06)-(LF07+LF08)] PI Total Inccured (FIN10)
+
+[&Assign FIN05=LF09]
+[&Assign FIN10=LF10]
+[&Assign FIN11=LF01+LF05] Total Reserves
+[&Assign FIN12=LF02+LF06] Total Paid
+[&Assign FIN13=LF03+LF07] Total Recovery Reserves
+[&Assign FIN14=LF04+LF08] Total Recovered
+[&Assign FIN15=LF09+LF10] Total Inccured 
+********************************************************************************
+***   End of Script
+********************************************************************************

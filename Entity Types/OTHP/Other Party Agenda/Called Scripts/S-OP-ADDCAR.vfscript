@@ -1,0 +1,124 @@
+********************************************************************************
+***  Script: S-OP-ADDCAR
+***  Called By:
+***  Calls:
+***  Created By: SG On 17/01/13
+********************************************************************************
+
+  ** Adds OP as a Vehicle
+  
+[&Assign LF01=""]   OP Name
+[&Assign LF02=""] Answer to question if OP has Representatives
+[&Assign LF03=""] Driver name if OP is COMM
+[&Assign OPD20=TF01] Their Reference
+
+[&Show OPD,no-cancel,no-help,title=SYS01+" - New OP Vehicle"] OP Details
+[&Call UENAME]
+
+** Set OP Name & Window Title   
+[&SelectEntity field="OPD01",ref="scope"]
+[&If scope.EN06="COMM"]
+  [&Assign LF01=OPD02]  
+[&Else]
+  [&Assign LF01=OPD03]
+[&EndIf]
+[&Assign SYS02 = SYS01+" - OP: "+LF01] Window Title
+  
+[&If OPD26="Yes"] ** Witness
+  [&CreateRole type="WITNESS"]
+[&EndIf]
+
+
+[&Assign OPV01="Yes"] ** Turn On Loading? Flag
+[&Assign OPV18="Yes"] ** Set to 'No" in S-OPV-VIEW, so the below still gets executed at least once
+
+[&DoWhile OPV01="Yes" &And OPV18="Yes"] This will loop until OPV18 remains 'No' after S-PVD-VIEW
+  [&Show OPV,no-cancel,no-help,title=SYS02] ** Vehicle Details  
+  [&If OPV18="Yes"]
+    [&SelectRelation relation-field="OPV17",ref="myVehicle"]
+    [&With myVehicle]
+      [&Show VEH,no-cancel,no-help]
+    [&EndWith]
+  [&EndIf]
+[&EndDoWhile]
+
+&If OPV02=""]
+  &Schedule ,"Establish Vehicle Details for OP: "+LF01,date-due=today+1(days)]
+&EndIf]
+
+
+[&If scope.EN06="COMM"]
+  [&Show ODR,no-cancel,no-help,title=SYS02]  
+[&EndIf]
+[&SelectRelation type="OTHERPARTY_FILE",ref="myfile"]
+If myfile.ICD20<>"non-fault"]
+   [&If 'Was the vehicle damaged?'(Question)="Yes"]
+      [&Show OVD:3,no-cancel,no-help,title=SYS02+" - Reg: "+OPV02] OP Vehicle Damage
+      &DoWhile OVD03="Select..."]
+         &If OVD03="Select..."]
+            &Message "You must complete mandatory information:  Was OP vehicle driveable"]
+         &EndIf]
+         &Show OVD:3,no-cancel,no-help,title=SYS02+" - Reg: "+OPV02] OP Vehicle Damage
+      &EndDoWhile]
+      [&If OVD19="Other" &And OVL08=""]
+        [&Show OVL,no-cancel,no-help,title=SYS02+" - Reg: "+OPV02] OP Vehicle Location
+     [&EndIf]
+  [&EndIf]
+&EndIf]
+
+
+&Select GOPN:new,group]
+&Assign OPN17="Yes"] Make the first entered Primary by default, as one needs to be primary
+&Show OPN:22,no-cancel,no-help,no-navigate,title=SYS02] OP Insurer
+&DoWhile OPN22=""]
+   &Message "You must complete the mandatory information:  Policy number"]
+   &Show OPN:22,no-cancel,no-help,no-navigate,title=SYS02] 
+&EndDoWhile]
+&Assign LF02="Yes"]
+&DoWhile LF02="Yes"]
+  &Assign LF02=prompt("Does "+LF01+" have any more insurers?")(Question)]
+  &If LF02="Yes"]
+    &Select GOPN:new,group]
+    &Show OPN:22,no-cancel,no-help,no-navigate,title=SYS02] OP Insurer
+    &DoWhile OPN22=""]
+       &Message "You must complete the mandatory information:  Policy number"]
+       &Show OPN:22,no-cancel,no-help,no-navigate,title=SYS02] OP Insurer
+    &EndDoWhile]
+  &EndIf]
+&EndDoWhile]
+
+
+&If scope.EN06="COMM"]
+  &Assign LF03=ODR02]
+&Else]
+  &Assign LF03=PHO03]
+&EndIf]
+[&If myfile.ICD20<>"non-fault"]
+   [&If prompt ("Was "+LF01+" injured?")(question)="Yes"]
+      [&Assign OPI01="yes"]
+     [&Show OPI,no-cancel,no-help,title=SYS02] OP Injuries
+   [&EndIf]
+   
+   [&If prompt ("Is "+LF01+" currently in hire?")(Question)="Yes"]
+     [&Show OPH,no-cancel,no-help,title=SYS02] OP Hirer
+   [&EndIf]
+   
+   [&If prompt ("Does "+LF01+" have a solicitor?")(Question)="Yes"]
+     [&Show OSO,no-cancel,no-help,no-navigate,title=SYS02] OP Solicitor
+   [&EndIf]
+   
+   [&Assign LF02=prompt("Does "+LF01+" have any other representatives?")(Question)]
+   [&If LF02="Yes"]
+     [&Select IREP:new,group]  
+     [&Show OPS,no-cancel,no-help,no-navigate,title=SYS02] OP Representatives
+     [&Call S-OP-REPVALIDATION]
+     [&DoWhile LF02="Yes"]
+       [&Assign LF02=prompt("Does "+LF01+" have any more representatives?")(Question)]
+       [&If LF02="Yes"]
+         [&Select IREP:new,group]
+         [&Show OPS,no-cancel,no-help,no-navigate,title=SYS02] OP Representatives
+         [&Call S-OP-REPVALIDATION]
+       [&EndIf]
+     [&EndDoWhile]
+   [&EndIf]
+[&EndIf]

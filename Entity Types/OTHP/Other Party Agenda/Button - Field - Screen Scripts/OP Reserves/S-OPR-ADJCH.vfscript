@@ -1,0 +1,29 @@
+********************************************************************************
+***  Script: S-OPR-ADJCH                                                     ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: RRH On 20/12/12                                             ***
+********************************************************************************
+
+[&SelectRelation type="OTHERPARTY_FILE",ref="myFILE"]
+[&Assign LF01=myFILE.MT30]
+[&Call S-OPR-RESADJUST,input="OPCH",input=OPR09,input=LF01]
+
+
+
+------------------------------------------
+** PREVIOUS VERSION WITH REFERRAL SCHEDULE
+&If OPR09>4999]
+   &If opr27=""]
+      &Assign opr27="set"]
+      &With myFILE]
+         &History "OPCH reserve reached £5,000 - Notification schedule created"]
+         &Schedule S-WF-CH5K-NOTIFY,"Send £5,000 Credit Hire Notification Referral",date-due=today,priority="Critical",user-data1="5k-notify"]
+      &EndWith]
+      &Message "                                      OPCH Reserve has reached £5,000.<CR><CR>A notification schedule has been created for you to complete a CH notification referral."]
+   &EndIf]
+&EndIf]
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:
+

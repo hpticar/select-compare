@@ -1,0 +1,163 @@
+********************************************************************************
+***  Script Code : S-MIAFTR-INSERT-OP
+***  Description : MIAFTR - Send INSERT request for OP vehicle (OVD28)
+***
+***  Created By  : Hrvoje Pticar On 04/06/18 @ 16:13:23
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&SelectEntity type="ADMI",ref="myADMI"]
+[&With myADMI]
+   [&If SYS03="Live"]
+      [&If TOG02="No"]
+         [&Message "Feature not enabled yet!"]
+         [&Quit]
+      [&EndIf]
+   [&EndIf]
+   [&Assign LF09=SYS09+"\Haven.Claims.MIAFTR.exe"]
+   [&Assign LF604=SYS03]
+[&EndWith]
+
+[&Assign LF603="search('"+LF09+"')":proval]
+[&If LF603=""]
+   [&Message "MIAFTR client not found. Please contact IT!"]
+   [&Quit]
+[&EndIf]
+
+[&Assign LF02="INSERT"]
+
+[&SelectRelation type="OTHERPARTY_FILE",ref="myFILE"]
+[&If myFILE.MFR01="Yes"]
+   [&Assign LF02="AMEND"]
+[&EndIf]
+
+[&With myFILE]
+   [&ForEach GOTP]
+      [&SelectRelation relation-field=OTP01,ref="myOtherOP"]
+      [&If myOtherOP.MFR01="Yes"]
+         [&Assign LF02="AMEND"]
+      [&EndIf]
+   [&EndFor]
+[&EndWith]
+
+[&Assign LF99=""] // Error List
+[&Assign LF82=OVD02]
+[&If LF82<>"Total Loss"]
+   [&Assign LF99=LF99+"* Damage Severity must be Total Loss to register with MIAFTR.
+"]
+[&EndIf]
+[&If LF82="Windscreen Only"]
+   [&Assign LF99=LF99+"* Damage Severity set to Windscreen Only.
+"]
+[&EndIf]
+[&If LF82="Total Loss" &And OVD26 &Begins "Select"]
+   [&Assign LF99=LF99+"* Salvage category not selected.
+"]
+[&EndIf]
+
+[&Assign LF98=OVD06+OVD07+OVD08+OVD09+OVD10+OVD11+OVD12+OVD13+OVD14+OVD15+OVD16]
+[&If LF98 &Contains "Y"]
+[&Else]
+  [&Assign LF99=LF99+"* No damage area selected.
+"] 
+[&EndIf]
+
+[&Assign LF18=OVD17]
+[&If LF18 &IsOneOf"none,none.no,no.,no damage,no damage."]
+   [&Assign LF99=LF99+"* Damage Description field states no damage.
+"] 
+[&EndIf]
+
+[&If LF99<>""]
+   [&Message LF99,title="Error"]
+[&Else]
+   [&Call subAmendRetained]
+   [&If LF02="INSERT"]
+      [&ProgressBar mode="ON",text="Inserting MIAFTR record...           ",title="MIAFTR"]
+   [&Else]
+      [&ProgressBar mode="ON",text="Amending MIAFTR record...            ",title="MIAFTR"]
+   [&EndIf]
+   [&Assign LF03=EN56:whole:text]
+   
+   [&Assign LF01="<?xml version=" + quote + "1.0" + quote + " encoding=" + quote + "UTF-8" + quote + "?>"]
+   [&Assign LF01=LF01+"<MiaftrRequest><Action>"+LF02+"</Action><ClaimReference>"+MT05+"</ClaimReference>"]
+   [&Assign LF01=LF01+"<Parties><Party>"+LF03+"</Party></Parties></MiaftrRequest>"]
+   
+   [&Assign LF05="c:\temp\vf\"+US01+"_MIAFTR_Request.xml"]
+   [&Assign LF06="c:\temp\vf\"+US01+"_MIAFTR_Response.txt"]
+   [&Out LF05:LF01]
+   [&OSCommand LF09+" "+LF604+" "+LF05+" "+LF06]
+   [&ProgressBar mode="OFF"]
+   [&Assign LF10=""] // Success?
+   [&Assign LF11=""] // Path to HTML response file
+   [&Assign LF12=""] // List of errors and warnings
+   [&Assign LF14=""] // Path to JSON response file
+   
+   [&Import filename=LF06,delimiter="|"]
+      [&If IF01="S"]
+         [&Assign LF10="S"]
+         [&Assign LF11=IF02]
+      [&EndIf]
+      [&If IF01="J"]
+         [&Assign LF14=IF02]
+      [&EndIf]
+      [&If IF01 &IsOneOf "F,E,W,I"]
+         [&If IF01="E"]
+            [&Assign LF13="Error"]
+         [&Else]
+            [&If IF01="W"]
+               [&Assign LF13="[Warning]"]
+            [&Else]
+               [&If IF01="F"]
+                  [&Assign LF13="[Fatal]"]
+               [&Else]
+                  [&Assign LF13="[Info]"]
+               [&EndIf]
+            [&EndIf]
+         [&EndIf]
+         [&Assign LF13=LF13+": "+IF02]
+         [&Assign LF12=LF12+LF13+"
+"]
+      [&EndIf]
+   [&EndImport]
+   
+   [&If LF10="S"] // SUCCESS!!
+      [&Assign LF16=""]
+      [&Import filename=LF14,delimiter="¬"]
+         [&Assign LF16=LF16+IF01+"
+"]
+      [&EndImport]
+      [&With myFILE]
+         [&History "MIAFTR "+LF02+" Record - Result";LF16,read=LF11,user-data1="MIAFTR Result"]
+      [&EndWith]
+      [&If LF12<>""]
+         [&With myFILE]
+            [&History "MIAFTR "+LF02+" Record - Messages";LF12]
+         [&EndWith]
+      [&EndIf]
+
+      [&Assign MFR01="Yes"]
+      [&Message "MIAFTR "+LF02+" Successful.
+
+"+LF12,title="MIAFTR "+LF02]
+      [&Open file=LF11]
+      [&OSCommand "timeout /t 2 >nul"]
+   [&Else]
+      [&Message LF12,title="MIAFTR Issues"]
+   [&EndIf]
+   
+   [&OSCommand "del "+LF11]
+   [&OSCommand "del "+LF14]
+[&EndIf] // LF99
+
+[&Call S-OVD-VIEW]
+
+[&Sub subAmendRetained]
+   [&Assign LF19=prompt("Salvage retained by:")(choose "Insurer":"Claimant":"Other":"Unknown",no-cancel)]
+   [&Assign MFR03=LF19:caps]
+[&EndSub]
+********************************************************************************
+***   End of Script
+********************************************************************************

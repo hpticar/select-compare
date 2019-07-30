@@ -1,0 +1,58 @@
+********************************************************************************
+***  Script Code : S-OVD-VIEW
+***  Description : Vehicle Damage VIEW Script
+***
+***  Created By  : Adam Readman On 21/08/14 @ 10:44:08
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign OVD27="Register with MIAFTR"] // This is because field was repurposed from a checkbox, so need to rename
+[&Assign OVD28="Amend MIAFTR"]
+
+[&If MFR01="Yes"]
+   [&Field code="OVD27",attribute="read-only",value="yes"]
+   [&Assign OVD27="MIAFTR Submitted"]
+   [&Field code="OVD28",attribute="read-only",value="no"]
+[&Else]
+   [&Field code="OVD27",attribute="read-only",value="no"]
+   [&Field code="OVD28",attribute="read-only",value="yes"]
+[&EndIf]
+
+[&SelectEntity type="ADMI",ref="myADMI"]
+[&If myADMI.SYS03="Live"]
+   [&If myADMI.TOG02="No"]
+      [&Field code="OVD27",attribute="visible",value="no"]
+   [&EndIf]
+[&EndIf]
+
+// SET FOREGROUND COLOUR OF OVD19, AS PURPLE DENOTES SCRIPT...
+[&Field code="OVD19",attribute="forecolour",value=0]
+
+2,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,23
+[&If OTHERPARTY_FILE.SYS25:char(first=1,number=1)="N"]
+   [&Field code="OVD02",attribute="label-forecolour",value="2"]
+   [&Field code="OVD04",attribute="label-forecolour",value="2"]
+   [&Field code="OVD06",attribute="label-forecolour",value="2"]
+   [&Field code="OVD07",attribute="label-forecolour",value="2"]
+   [&Field code="OVD08",attribute="label-forecolour",value="2"]
+   [&Field code="OVD09",attribute="label-forecolour",value="2"]
+   [&Field code="OVD10",attribute="label-forecolour",value="2"]
+   [&Field code="OVD11",attribute="label-forecolour",value="2"]
+   [&Field code="OVD12",attribute="label-forecolour",value="2"]
+   [&Field code="OVD13",attribute="label-forecolour",value="2"]
+   [&Field code="OVD14",attribute="label-forecolour",value="2"]
+   [&Field code="OVD15",attribute="label-forecolour",value="2"]
+   [&Field code="OVD16",attribute="label-forecolour",value="2"]
+   [&Field code="OVD17",attribute="label-forecolour",value="2"]
+   [&Field code="OVD18",attribute="label-forecolour",value="2"]
+   [&Field code="OVD19",attribute="label-forecolour",value="2"]
+   [&Field code="OVD20",attribute="label-forecolour",value="2"]
+   [&Field code="OVD23",attribute="label-forecolour",value="2"]
+[&EndIf]
+
+[&Call S-OVD-CHANGESEVERITY]
+
+[&Assign TF500=OVD19]

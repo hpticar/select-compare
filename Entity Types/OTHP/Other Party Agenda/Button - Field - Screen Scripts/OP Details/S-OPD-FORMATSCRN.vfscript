@@ -1,0 +1,75 @@
+********************************************************************************
+***  Script: S-OPD-FORMATSCRN                                                ***
+***  Called By: S-OPD-VIEW, S-CREATE-CLIENT                                  ***
+***  Calls:                                                                  ***
+***  Created By: RRH On 04/01/13                                             ***
+********************************************************************************
+
+[&If SYS03 &IsOneOf "Vehicle,Motorcycle"] 
+   [&Field code="OPD19",attribute="visible",value="Yes"] Number of passengers
+   [&Field code="OPD17",attribute="visible",value="Yes"] OP Sequence (concertina case)
+   [&Field code="OPD25",attribute="visible",value="No"]  Position in vehicle, not needed if not passenger
+[&EndIf]
+
+[&If SYS03 &IsOneOf "OPVP,PHVP"] Passenger in PH(IV) or OP Vehicle
+   [&Field code="OPD17",attribute="visible",value="No"]  OP Sequence (concertina case)
+   [&Field code="OPD19",attribute="visible",value="No"]  Number of passengers
+   [&Field code="OPD25",attribute="visible",value="Yes"] Position in vehicle
+ [&EndIf]
+
+[&If SYS03 &IsOneOf "Cyclist,Pedestrian,PropertyOwner,Witness"]
+   [&Field code="OPD17",attribute="visible",value="No"]  OP Sequence (concertina case)
+   [&Field code="OPD19",attribute="visible",value="No"]  Number of passengers
+   [&Field code="OPD25",attribute="visible",value="No"]  Position in vehicle
+   [&Field code="OPD29",attribute="visible",value="No"]  Fare paying?
+[&EndIf]
+
+[&If SYS03="PropertyOwner"] Additiona settings for Property Owner
+   [&Field code="OPD28",attribute="visible",value="No"]  Vulnerable road user
+[&EndIf]
+
+[&SelectRelation relation-field="OPD01",ref="scope"]
+
+** All fields free text, but labels need changing for essential fields, and some need hiding for private contacts
+[&If scope.EN06="COMM"]    *** Commercial OPD
+   [&Field code="OPD08",attribute="label",value="Contact Name"] @Contact COMM
+   [&Field code="OPD09",attribute="label",value="Direct Dial"]
+   [&Field code="OPD02",attribute="visible",value="yes"] Commercial name pointer
+   [&Field code="OPD03",attribute="visible",value="no"] Private name pointer
+   
+   [&Field code="OPD04",attribute="visible",value="Yes"] Commercial Office
+   [&Field code="OPD05",attribute="visible",value="Yes"] Commercial Switchboard
+   [&Field code="OPD06",attribute="visible",value="Yes"] Commercial Fax
+   
+   [&Field code="OPD11",attribute="visible",value="No"] Individual Address
+   [&Field code="OPD12",attribute="visible",value="No"] Individual Daytime
+   [&Field code="OPD07",attribute="visible",value="No"] Individual Mobile
+   
+   [&Field code="OPD13",attribute="visible",value="No"] Private contact: Evening
+   [&Field code="OPD14",attribute="visible",value="No"] Private contact: Mobile
+   [&Field code="OPD15",attribute="visible",value="No"] Private Contact: Fax
+   [&Field code="OPD21",attribute="visible",value="No"] Private Contact: DOB
+[&Else]                    *** Private OPD
+   [&Field code="OPD08",attribute="label",value="Contact Name"] @Contact PRIV
+   [&Field code="OPD09",attribute="label",value="Daytime"]
+   [&Field code="OPD02",attribute="visible",value="no"] Commercial name pointer
+   [&Field code="OPD03",attribute="visible",value="Yes"] Commercial name pointer
+   
+   [&Field code="OPD04",attribute="visible",value="No"] Commercial Office
+   [&Field code="OPD05",attribute="visible",value="No"] Commercial Switchboard
+   [&Field code="OPD06",attribute="visible",value="No"] Commercial Fax
+   
+   [&Field code="OPD11",attribute="visible",value="Yes"] Individual Address
+   [&Field code="OPD12",attribute="visible",value="Yes"] Individual Daytime
+   [&Field code="OPD07",attribute="visible",value="Yes"] Individual Mobile
+   
+   [&Field code="OPD13",attribute="visible",value="Yes"] Evening
+   [&Field code="OPD14",attribute="visible",value="Yes"] Mobile
+   [&Field code="OPD15",attribute="visible",value="Yes"] Fax
+   [&Field code="OPD21",attribute="visible",value="Yes"] DOB
+[&EndIf]
+
+
+*** AMENDMENTS *****************************************************************
+RRH 2012-12-18 Recoded to OPD, reworked to use link labels rather than buttons
+  

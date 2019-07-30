@@ -1,0 +1,16 @@
+********************************************************************************
+***  Script: S-OPN-VIEW                                                      ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: SG On 17/01/13                                              ***
+********************************************************************************
+
+[&Call S-OPN-FORMATSCRN]
+
+[&If OTHERPARTY_FILE.SYS25:char(first1,number=1)="N"]
+   [&Field code="OPN08",attribute="label-forecolour",value="2"]
+   [&Field code="OPN20",attribute="label-forecolour",value="2"]
+[&EndIf]
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:
+

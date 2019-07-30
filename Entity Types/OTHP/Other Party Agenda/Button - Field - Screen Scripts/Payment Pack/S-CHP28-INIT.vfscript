@@ -1,0 +1,62 @@
+********************************************************************************
+***  Script Code : S-CHP28-INIT
+***  Description : Credit Hire Grid
+***
+***  Created By  : John Wheeler On 25/06/18 @ 13:09:58
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Grid action="delete"]
+[&Grid action="create-col",name="                ",format="x(20)",type="char",key]               1 name
+[&Grid action="create-col",name="    Claiming",format="->>>,>>9.99",type="deci"]          2
+[&Grid action="create-col",name="Initial Offer",format="->>>,>>9.99",type="deci"]   3
+[&Grid action="create-col",name="Current Offer",format="->>>,>>9.99",type="deci"]     4
+[&Grid action="create-col",name="Settled",format="->>>,>>9.99",type="deci"]           5
+
+[&Grid action="create-row"]
+[&Assign GR01="Daily Rate"]
+[&Assign GR02=CHD01]
+[&Assign GR03=CHD02]
+[&Assign GR04=CHD03]
+[&Assign GR05=CHD04]
+
+[&Grid action="create-row"]
+[&Assign GR01="Hire Duration"]
+[&Assign GR02=CHD05]
+[&Assign GR03=CHD06]
+[&Assign GR04=CHD07]
+[&Assign GR05=CHD08]
+
+[&Grid action="create-row"]
+[&Assign GR01="Credit Hire"]
+[&Assign GR02=CHD09]
+[&Assign GR03=CHD10]
+[&Assign GR04=CHD11]
+[&Assign GR05=CHD12]
+
+[&Grid action="create-row"]
+[&Assign GR01="Credit Repair"]
+[&Assign GR02=CHD13]
+[&Assign GR03=CHD14]
+[&Assign GR04=CHD15]
+[&Assign GR05=CHD16]
+
+[&Grid action="create-row"]
+[&Assign GR01="Recovery & Storage"]
+[&Assign GR02=CHD17]
+[&Assign GR03=CHD18]
+[&Assign GR04=CHD19]
+[&Assign GR05=CHD20]
+
+[&Grid action="create-row"]
+[&Assign GR01="Total"]
+[&Assign GR02=CHD21]
+[&Assign GR03=CHD22]
+[&Assign GR04=CHD23]
+[&Assign GR05=CHD24]
+********************************************************************************
+***   End of Script
+********************************************************************************

@@ -1,0 +1,38 @@
+********************************************************************************
+***  Script Code : S-REMOVE-PMP
+***  Description : Remove PMP info
+***
+***  Created By  : Charlie Smith On 05/06/17 @ 12:44:21
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&If 'Are you sure you want to remove ALL informaiton from this screen?  It cannot be recovered.'(q)="yes"]   
+   [&Assign PMP01=""]
+   [&Assign PMP02="Select..."]
+   [&Assign PMP03=""]
+   [&Assign PMP04=0]
+   [&Assign PMP05=""]
+   [&Assign PMP06="Select..."]
+   [&Assign PMP07="Select..."]
+   [&Assign PMP08="Select..."]
+   PMP09 is a pointer
+   [&Assign PMP10=0]
+   [&Assign PMP11=0]
+   [&Assign PMP12=0]
+   [&Assign PMP13=""]
+   [&Assign PMP14=0]
+   [&Assign PMP15=0]
+   [&Assign PMP16=0]
+   [&Assign PMP17=""]
+   [&Assign PMP18=""]
+   [&Assign PMP19=""]
+   [&Assign PMP20="Select..."]
+   [&Assign PMP21="Select..."]
+[&EndIf]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

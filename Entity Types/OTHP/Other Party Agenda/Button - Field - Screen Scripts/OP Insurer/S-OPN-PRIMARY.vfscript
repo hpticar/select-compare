@@ -1,0 +1,22 @@
+********************************************************************************
+***  Script: S-OPN-PRIMARY                                                   ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: HP On 16/07/13                                              ***
+********************************************************************************
+
+[&Assign LF01=OPN01]
+[&ForEach GOPN]
+   [&If OPN01=LF01]
+      [&Assign OPN17="Yes"]
+   [&Else]
+      [&Assign OPN17="No"]
+   [&EndIf]
+[&EndFor]
+[&ForEach GOPN,OPN17="Yes"] Have to select the checked one again, otherwise end up with the last one from iteration shown
+   [&Select]
+[&EndFor]
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

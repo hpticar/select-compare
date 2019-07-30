@@ -1,0 +1,31 @@
+********************************************************************************
+***  Script Code : S-CHD-SETTLEDCH-SUM
+***  Description : Added up Settled Amounts
+***
+***  Created By  : John Wheeler On 25/06/18 @ 16:20:58
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF01=0] Daily Hire rate
+[&Assign LF02=0] Hire duration
+[&Assign LF03=0] total amount of Hire
+[&Assign LF04=0] Repair cost
+[&Assign LF05=0] storage cost
+
+[&Assign LF01=CHD04]
+[&Assign LF02=CHD08]
+[&Assign LF03=LF01*LF02]
+[&Assign LF04=CHD16]
+[&Assign LF05=CHD20]
+[&Assign LF06=LF03+LF04+LF05]
+
+[&Assign CHD12=LF03]
+
+[&Call S-CHD-CALCTOTALS]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

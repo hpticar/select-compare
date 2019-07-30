@@ -1,0 +1,23 @@
+********************************************************************************
+***  Script Code : S-OSE02-FIRST-OP-DETS
+***  Description : Assign OSE02 Hyperlink script
+***
+***  Created By  : Charlie Smith On 20/09/16 @ 11:35:12
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&If OSE02="" &Or OSE02="Select..."]
+   [&Assign LF01='Select contact details'(choose "Full OP Details Available":"Address Only":"Telephone Number Only":"MoJ Portal":"Reg Only":"None")]
+   [&Assign OSE02=LF01]
+   [&If LF01="Reg only"]
+      [&Call S-OPO-DVLAREQUEST]
+   [&EndIf]
+[&Else]
+   [&Message "Initial details have already been selected - Team Leader to authorise any further amendment through IT"]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

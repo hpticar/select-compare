@@ -1,0 +1,36 @@
+********************************************************************************
+***  Script Code : S-OPD-SENDSMS
+***  Description : Send SMS to OP
+***
+***  Created By  : Hrvoje Pticar On 28/02/17 @ 12:22:39
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&SelectRelation type="OTHERPARTY_FILE",ref="myfile"]
+[&Assign LF01=EN56:whole:text]
+[&Assign LF02=OPD07]
+[&Assign LF03=OPV21] hire class
+[&Assign LF04=OPV04]
+[&Assign LF05=OPV05]
+[&If LF04="" &Or LF05=""]
+   [&Assign LF04=""]
+[&Else]   
+   [&Assign LF06=LF04:char():caps]
+   [&Assign LF04=LF04:char(first = 2,number = 999):lc]
+   [&Assign LF04=LF06+LF04]
+   [&Assign LF07=LF05:char():caps]
+   [&Assign LF05=LF05:char(first = 2,number = 999):lc]
+   [&Assign LF05=LF07+LF05]
+   [&Assign LF08=LF04+" "+LF05]
+[&EndIf]   
+[&With myfile]
+   [&Call S-SMS-SENDFROMFILE,input=LF01,input=LF02,input="OPD",input=LF03,input=LF08]
+[&EndWith]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

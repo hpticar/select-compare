@@ -1,0 +1,19 @@
+********************************************************************************
+***  Script: S-OPD-VIEW                                                      ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: SG On 17/01/13                                              ***
+********************************************************************************
+
+[&Call S-OPD-FORMATSCRN]
+
+[&If OTHERPARTY_FILE.SYS25:char(number=1,first=1)="N"]
+   [&Field code="OPD08",attribute="label-forecolour",value="2"]
+   [&Field code="OPD09",attribute="label-forecolour",value="2"]
+   [&Field code="OPD10",attribute="label-forecolour",value="2"]
+   [&Field code="OPD13",attribute="label-forecolour",value="2"]
+   [&Field code="OPD14",attribute="label-forecolour",value="2"]
+   [&Field code="OPD25",attribute="label-forecolour",value="2"]
+[&EndIf]
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

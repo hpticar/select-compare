@@ -1,0 +1,42 @@
+********************************************************************************
+***  Script: S-OP-ADD                                                        ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: SG On 17/01/13                                              ***
+********************************************************************************
+
+   ** Obsolete as functionality moved to MATA.S-INIT-S13
+
+
+Assign TF01=""]
+
+Assign TF01=prompt ("Select other party type")(Choose Car:Van:Bus:Motorcycle:Pedestrian:Cyclist:"Property owner - Public":"Property owner - Private",no-cancel)]
+
+If TF01="Car" &Or TF01="Van" &Or TF01="Bus"]
+   Call S-OP-ADDCAR]
+Else]
+   If TF01="Motorcycle"]
+      Call S-OP-ADDMOT]
+   Else]
+      If TF01="Pedestrian"]
+         Call S-OP-ADDPED]
+      Else]
+         If TF01="Cyclist"]
+            Call S-OP-ADDCYC]
+         Else]
+            If TF01="Property Owner - Public"]
+               Call S-OP-ADDPUB]
+            Else]
+               If TF01="Property Owner - Private"]
+                  Call S-OP-ADDPRV]
+               EndIf] Private Property Owner
+            EndIf] Public Property Owner
+         EndIf] Cyclist
+      EndIf] Pedestrian
+   EndIf] Motorcycle
+EndIf] Car/Van/Bus
+  
+Call UENAME]
+
+*** AMENDMENTS *****************************************************************
+** HP 2013-06-24 - Funcionality of this script moved back to File into S-INIT-S13

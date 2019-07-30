@@ -1,0 +1,19 @@
+********************************************************************************
+***  Script: S-OP-ADDWIT                                                     ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: SG On 22/01/13                                              ***
+********************************************************************************
+
+[&Assign TF100=""]
+
+[&Assign OPD20="Witness"]
+[&Assign OPD26="Yes"]
+[&Show OPD,no-cancel,no-help,title=SYS01+" - New Witness"] OP Details
+
+&Message "Check for POL02 fleet or taxi and OPD29=blank"]
+
+[&CreateRole type="WITNESS"]
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

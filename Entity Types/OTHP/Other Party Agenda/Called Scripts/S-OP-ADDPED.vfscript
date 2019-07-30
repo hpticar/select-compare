@@ -1,0 +1,52 @@
+********************************************************************************
+***  Script: S-OP-ADDPED
+***  Called By:
+***  Calls:
+***  Created By: SG On 22/01/13
+********************************************************************************
+
+[&Assign OPD20=TF01]
+[&Assign OPD28="Yes"] Vulnerable Road User
+
+[&Assign SYS04=prompt("Is he/she a minor?")(Question)]
+
+[&Show OPD,no-cancel,no-help,title=SYS01+" - New Pedestrian"] OP Details
+[&Call UENAME]
+
+** Set Window Title   
+[&Assign SYS02 = SYS01+" - OP: "+OPD03] << Pedestrian can only be INDI
+
+[&If OPD26="Yes"]
+  [&CreateRole type="WITNESS"]
+[&EndIf]
+
+Vulnerable Road Users
+[&Show VRU,no-cancel,no-help,title=SYS02] Common Questions
+[&Show VRP,no-cancel,no-help,title=SYS02] Pedestrian
+[&If SYS04="Yes"]
+  [&Show VRM,no-cancel,no-help,title=SYS02] Minor
+[&EndIf]
+[&If OTHERPARTY_FILE.ICD20<>"non-fault"]
+   [&If prompt ("Was "+OPD03+" injured?")(Question)="Yes"]
+     [&Show OPI,no-cancel,no-help,title=SYS02] OP Injuries
+   [&EndIf]
+   
+   [&If prompt ("Does "+OPD03+" have a solicitor?")(Question)="Yes"]
+     [&Show OSO,no-cancel,no-help,no-navigate,title=SYS02] OP Solicitor
+   [&EndIf]
+   
+   [&Assign LF02=prompt("Does "+OPD03+" have any representatives?")(Question)]
+   [&If LF02="Yes"]
+     [&Select IREP:new,group]  
+     [&Show OPS,no-cancel,no-help,no-navigate,title=SYS02] OP Representatives
+     [&Call S-OP-REPVALIDATION]
+     [&DoWhile LF02="Yes"]
+       [&Assign LF02=prompt("Does "+OPD03+" have any more representatives?")(Question)]
+       [&If LF02="Yes"]
+         [&Select IREP:new,group]
+         [&Show OPS,no-cancel,no-help,no-navigate,title=SYS02] OP Representatives
+         [&Call S-OP-REPVALIDATION]
+       [&EndIf]
+     [&EndDoWhile]
+  [&EndIf]
+[&EndIf]

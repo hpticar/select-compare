@@ -1,0 +1,30 @@
+********************************************************************************
+***  Script: S-OPR-PAYPI                                                     ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: RRH On 20/12/12                                             ***
+********************************************************************************
+
+************************** TEMPORY BUG FIX
+[&If EN06="PAYM"]
+   [&Message "PLEASE CLOSE AND REOPEN THIS OTHER PARTY WINDOW<cr>BEFORE REQUESTING A NEW PAYMENT!<CR>We are looking into this issue."]
+   [&Quit]
+[&EndIf]
+***********************************************
+
+[&Assign LF01 = "os-getenv ('username')":proval]
+
+[&SelectEntity type="INDI",int-code=US13,ref="myUSER"]   Get the current user permission level
+[&If myUSER.FEEEARNER.AUT07<>LF01]
+  [&Message "To request a payment you need to be logged on to Visualfiles AND Windows as the SAME USER!",title="PAYMENT FRAUD PREVENTION"]
+[&Else]
+  [&SelectRelation type="OTHERPARTY_FILE",ref="myFILE"]
+  [&Assign LF01=myFILE.MT30]
+  
+  [&Call SYSTEM.SS-PAYMENT-REQUEST,input="OP PI",input=OPR05,input="OP",input=LF01,input=EN56]
+[&EndIf] 
+ 
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

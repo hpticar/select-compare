@@ -1,0 +1,17 @@
+********************************************************************************
+***  Script Code : S-OVD02-HYPERLINK
+***  Description : Damage Severity Hyperlink
+***
+***  Created By  : Hrvoje Pticar On 16/04/18 @ 11:40:55
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign OVD02=prompt("Select Damage Severity:")(choose "None":"Light":"Medium":"Heavy":"Total Loss":"Windscreen Only",default=OVD02,no-cancel)]
+[&Call S-OVD-CHANGESEVERITY]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

@@ -1,0 +1,99 @@
+********************************************************************************
+***  Script Code : S-PIR-AUTH
+***  Description : PI Reserve auth pending reserves (PIR13 )
+***
+***  Created By  : John Wheeler On 14/02/18 @ 20:11:51
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+      ** Enter Script Description/Usage Info Here For Reference **
+
+** Assign Local Variables
+ &Assign LF100=""]                        ** First Variable
+ &Assign LF101=""]                        ** Second Variable
+
+[&Assign LF01=0]incurred total
+[&Assign LF02=0]user auth amount
+[&Assign LF03=0] pending reserve amuount
+[&Assign LF04=0] new incurred amount
+[&Assign LF05=""] reserve name
+[&Assign LF06=0]curren reserve amount
+[&Assign LF07=0]new reserve amount
+[&Assign LF08=""]pending reserve reson
+[&Assign LF09=""]create new schedule marker
+
+[&SelectRelation type="OTHERPARTY_FILE",ref="myFILE"]
+[&Assign LF01=myFILE.CFS01]
+[&SelectEntity int-code=US13,ref="myUSER"]
+[&Assign LF02=myUSER.FEEEARNER.AUT02]
+[&Assign LF08=PIR05]
+
+[&If LF01>LF02]
+   [&Assign LF09="create new schedule"]
+   [&Assign LF04=LF01]             
+[&Else]
+   [&Assign LF03=PIR04]
+   [&Assign LF04=LF01+LF03]
+   [&If LF04>LF02]
+      [&Assign LF09="create new schedule"]  
+   [&Else]
+      [&Assign LF05=PIR01]
+      [&Assign LF06=PIR02]
+      [&Assign LF07=LF06+LF03]
+      [&Assign PIR02=LF07]
+      [&Assign PIR04=0]
+      [&With myFILE]
+         [&Select RAHX:new] // reserve tracking
+         [&Assign RAH01=date]
+         [&Assign RAH02=time]
+         [&Assign RAH03=US02]
+         [&Assign RAH04=LF05]
+         [&Assign RAH05=PHO01]
+         [&Assign RAH06=LF06]
+         [&Assign RAH07=LF03]
+         [&Assign RAH08=LF07]
+         [&Assign RAH09="Reserve Adjustment via suspended reserve"]
+         [&Assign RAH10=LF08]
+         [&History LF05+" Adjusted by £"+LF03+" (from £"+LF06+" to £"+LF07+")";LF08]
+         [&Assign CFS01=LF04]
+         [&Assign CFS13=CFS13+LF03]
+      [&EndWith]       
+   [&EndIf]
+[&EndIf]
+
+[&If LF09="create new schedule"]
+   [&With myFILE]
+      [&If FE12="CVT"]
+         [&If LF04<100000]
+            [&UserInput prompt="The Claim Incurred is over your authority, select who you wish to send the suspended reserves for sign-off",choices="Suzanne Edwards:Geoff Jansz",default="Suzanne Edwards", result=LF22,no-cancel]
+         [&Else]
+            [&Assign LF22="Geoff Jansz"]   
+         [&EndIf]
+      [&Else]   
+         [&If LF04<=49999]
+            [&UserInput prompt="The Claim Incurred is over your authority, select who you wish to send the suspended reserves for sign-off",choices="Team Leader:Tech",default="Team Leader", result=LF22,no-cancel]
+         [&Else]
+            [&Assign LF22="tech"] // FH for the schedule  
+         [&EndIf]
+      [&EndIf]
+      [&Assign LF498=US02+" has added suspended reserves to this claim For PH"] schedule name
+      [&Assign LF151="Their comments are below, please review the claim and approve the reserves if appropriate."+"
+"+LF08]
+       [&If LF22="Team Leader"]
+          [&Schedule S-WF-PEND-RES,LF498,comments=LF151,date-due=today,priority=critical,fee-earner=US04(9)] create the schedule for TL no schedule code as only 1 per claim
+       [&Else]
+          [&If LF22="tech"] 
+             [&Schedule S-WF-PEND-RES,LF498,comments=LF151,date-due=today,priority=critical,fee-earner="Suspended Reserves"] create the schedule for Tech
+          [&Else]
+             [&Schedule S-WF-PEND-RES,LF498,comments=LF151,date-due=today,priority=critical,LF22] create the schedule for Tech  
+          [&EndIf]   
+       [&EndIf]     
+   [&EndWith]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

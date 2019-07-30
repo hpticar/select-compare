@@ -1,0 +1,65 @@
+********************************************************************************
+***  Script: S-OP-ADDPUB                                                     ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: SG On 22/01/13                                              ***
+********************************************************************************
+
+** Details for a Public property Owner as OP
+
+[&Assign LF01=""]    ** OP Name
+[&Assign OPD20=TF01] ** Their Reference
+[&Show OPD,no-cancel,no-help,title=SYS01+" - New Public PO"] OP Details
+[&Call UENAME]
+
+** Set OP Name & Window Title    
+[&SelectEntity field="OPD01",ref="scope"]
+[&If scope.EN06="COMM"]
+   [&Assign LF01=OPD02]   
+[&Else]
+   [&Assign LF01=OPD03]
+[&EndIf]
+[&Assign SYS02 = SYS01+" - OP: "+LF01] Window Title
+
+[&If OPD26="Yes"]
+   [&CreateRole type="WITNESS"]
+[&EndIf]
+
+[&Show OPY,no-cancel,no-help,title=SYS02] OP Property Details
+
+[&Select GOPN:new,group]
+[&Assign OPN17="Yes"] Make the first entered Primary by default, as one needs to be primary
+[&Show OPN:8,23,no-cancel,no-help,no-navigate,title=SYS02] OP Insurer
+[&Assign LF02="Yes"]
+[&DoWhile LF02="Yes"]
+   [&Assign LF02=prompt("Does "+LF01+" have any more insurers?")(Question)]
+   [&If LF02="Yes"]
+      [&Select GOPN:new,group]
+      [&Show OPN,no-cancel,no-help,no-navigate,title=SYS02] OP Insurer
+   [&EndIf]
+[&EndDoWhile]
+
+[&If OTHERPARTY_FILE.ICD20<>"non-fault"]
+   [&If prompt ("Does "+LF01+" have a solicitor?")(Question)="Yes"]
+      [&Show OSO,no-cancel,no-help,no-navigate,title=SYS02] OP Solicitor
+   [&EndIf]
+   
+   [&Assign LF02=prompt("Does "+LF01+" have any representatives?")(Question)]
+   [&If LF02="Yes"]
+      [&Select IREP:new,group]   
+      [&Show OPS,no-cancel,no-help,no-navigate,title=SYS02] OP Representatives
+      [&Call S-OP-REPVALIDATION]
+      [&DoWhile LF02="Yes"]
+         [&Assign LF02=prompt("Does "+LF01+" have any more representatives?")(Question)]
+         [&If LF02="Yes"]
+            [&Select IREP:new,group]
+            [&Show OPS,no-cancel,no-help,no-navigate,title=SYS02] OP Representatives
+            [&Call S-OP-REPVALIDATION]
+         [&EndIf]
+      [&EndDoWhile]
+   [&EndIf]
+[&EndIf]
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

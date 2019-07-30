@@ -1,0 +1,18 @@
+********************************************************************************
+***  Script: S-OVD-DRIVABLE                                                  ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: RRH On 28/01/13                                             ***
+********************************************************************************
+
+[&If OVD03="Yes"]
+   [&Assign OVD04=""]
+   [&Field code="OVD04",attribute="read-only",value="Yes"]
+[&Else]
+   [&If OVD03="No"]
+      [&Field code="OVD04",attribute="read-only",value="No"]
+   [&EndIf]
+[&EndIf]
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

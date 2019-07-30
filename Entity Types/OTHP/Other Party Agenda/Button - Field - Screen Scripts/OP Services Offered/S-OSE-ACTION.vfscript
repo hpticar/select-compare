@@ -1,0 +1,46 @@
+********************************************************************************
+***  Script Code : S-OSE-ACTION
+***  Description : OP Services Offered GRID Action
+***
+***  Created By  : Hrvoje Pticar On 24/08/16 @ 13:26:53
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&ForEach GR,GR08="Yes"]
+   [&Assign LF10=GR09]
+[&EndFor]
+
+[&Group code="GSRV",action="setindex",index=LF10]
+[&Assign LF01="show"]
+[&DoWhile LF01="show"]
+   [&Show SRV,no-cancel,no-help,no-navigate]
+   [&Assign LF01=""]
+   [&Assign LF02=""]
+   [&If SRV06="yes"] // successful contact, must provide services accepted
+      [&If SRV07="no" &And SRV10="Select..."]
+         [&Assign LF02="no reason"]
+      [&EndIf]
+      [&If SRV08="no" &And SRV11="Select..."]
+         [&Assign LF02="no reason"]
+      [&EndIf]
+      [&If SRV09="no" &And SRV12="Select..."]
+         [&Assign LF02="no reason"]
+      [&EndIf]
+   [&EndIf]
+   [&If LF02="no reason"]
+      [&Assign LF03=prompt("One or more services were not accepted, but no reason was given. Do you want to DELETE this attempt?")(question)]
+      [&If LF03="yes"]
+         [&Delete GSRV]
+      [&Else]
+         [&Assign LF01="show"]
+      [&EndIf]
+   [&EndIf]
+[&EndDoWhile]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

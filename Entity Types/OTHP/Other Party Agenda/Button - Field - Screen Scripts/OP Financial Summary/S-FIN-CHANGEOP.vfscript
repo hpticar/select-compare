@@ -1,0 +1,73 @@
+********************************************************************************
+***  Script Code : S-FIN-CHANGEOP
+***  Description : Open Another OP from the Claim
+***
+***  Created By  : John Wheeler On 08/02/19 @ 16:32:20
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF01=EN56] //EN56 of current OP
+[&Assign LF03=""] //grid response
+[&Assign LF100=""] //grid result (EN56 of target)
+[&Assign LF101=0] //count of files on OP
+[&Assign LF900=""] //error messages
+
+[&Grid action="delete"]
+[&Grid action="create"]
+[&Grid action="create-col",name="Name",format="X(30)",type="char"]
+[&Grid action="create-col",name="Party type",format="X(12)",type="char"]
+[&Grid action="create-col",name="Reg",format="X(10)",type="char"]
+[&Grid action="create-col",name="EN56",format="X(12)",type="char",hidden,key]
+
+[&ForEach OTHERPARTY_FILE,OTHERPARTY_FILE.MT08<>"COMP"]
+   [&Assign LF101=LF101+1]
+[&EndFor]
+[&If LF101=0]
+   [&Assign LF900=LF900+"This OP is not related to any claims!  If this is an error, please contact IT."]
+[&Else]
+   [&If LF101>0]
+      [&SelectRelation type="OTHERPARTY_FILE",ref="myClaim"] //get claim
+   [&EndIf]
+[&EndIf]
+
+[&With myClaim]
+   [&ForEach OTHERPARTY_OTHERPARTY,OTHERPARTY_OTHERPARTY.EN56<>LF01]
+      [&With OTHERPARTY_OTHERPARTY]
+         [&SelectRelation type="OTPH_OTHERPARTY",ref="myCommIndi"]
+         [&Grid action="create-row"]
+         [&With myCommIndi]
+            [&If EN06="INDI"]
+               [&Assign GR01=NAM11]
+            [&Else]
+               [&Assign GR01=ADD02]
+            [&EndIf]
+         [&EndWith]
+         [&Assign GR02=SYS08]
+         [&SelectRelation relation-field=OPV17,ref="myVehicle"]
+         [&If status(selectrelation)=""]
+            [&Assign GR03=OPV02]
+         [&Else]
+            [&Assign GR03="N/A"]
+         [&EndIf]
+         [&Assign GR04=EN56]
+      [&EndWith]
+   [&EndFor]
+[&EndWith]
+
+[&Grid action="Display",rows=10,title="Select OP to view",result=LF100,response=LF03]
+
+[&If LF03="button2" &Or LF03="GO"]
+   [&If LF100<>""]
+      [&SelectEntity int-code=LF100,ref="myOP"]
+      [&With myOP]
+         [&Open screen="FIN"]
+      [&EndWith]
+   [&EndIf] 
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

@@ -1,0 +1,36 @@
+********************************************************************************
+***  Script: S-OPN-FORMATSCRN                                                ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: SG On 17/01/13                                              ***
+********************************************************************************
+
+[&SelectRelation relation-field="OPN01",ref="scope"]
+[&If scope.EN06="COMM"]    *** Commercial OPN
+   [&Field code="OPN08",attribute= "label",value = "Main Contact"] ** @Contact COMM
+   [&Field code="OPN09",attribute= "label",value = "Direct Dial"]
+   [&Field code="OPN04",attribute= "script",value = "S-OPN-COMMOFFIGRID"]
+   
+   [&Field code="OPN13",attribute= "visible",value = "No"] ** Private contact: Evening
+   [&Field code="OPN14",attribute= "visible",value = "No"] ** Private contact: Mobile
+   [&Field code="OPN15",attribute= "visible",value = "No"] ** Private Contact: Fax
+   [&Field code="OPN03",attribute= "visible",value = "Yes"] ** Pointer to COMM OP
+   [&Field code="OPN07",attribute= "visible",value = "No"]  ** Pointer to PRIV OP
+
+[&Else]                        *** Private OPN
+   [&Field code="OPN08",attribute= "label",value = "Contact"] ** @Contact PRIV
+   [&Field code="OPN09",attribute= "label",value = "Daytime"]
+   [&Field code="OPN04",attribute= "script",value = " "]
+   
+   [&Field code="OPN13",attribute= "visible",value = "Yes"] ** Evening
+   [&Field code="OPN14",attribute= "visible",value = "Yes"] ** Mobile
+   [&Field code="OPN15",attribute= "visible",value = "Yes"] ** Fax
+   [&Field code="OPN03",attribute= "visible",value = "No"]  ** Pointer to COMM OP
+   [&Field code="OPN07",attribute= "visible",value = "Yes"] ** Pointer to PRIV OP
+
+[&EndIf]
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:
+  

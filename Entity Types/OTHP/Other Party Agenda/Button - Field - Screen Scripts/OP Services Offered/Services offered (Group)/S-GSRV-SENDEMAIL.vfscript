@@ -1,0 +1,44 @@
+********************************************************************************
+***  Script Code : S-GSRV-SENDEMAIL
+***  Description : Send email from Service Offered group instance
+***
+***  Created By  : Charlie Smith On 16/09/16 @ 15:09:03
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&If FIL05=""]
+   [&Assign LF03='No email address entered for OP, choose action:  '(choose "Add email address":"Do not send email")]
+   [&If LF03="Do not send email"]
+      [&Quit]
+   [&Else]
+      [&Assign LF04='Please enter email address']
+      [&If LF04=""]
+         [&Message "Email address entered is blank - script will exit"]
+         [&Quit]
+      [&Else]
+         [&Assign OPD10=LF04]
+      [&EndIf]
+   [&EndIf]
+[&EndIf]
+
+[&SelectRelation relation-field=OPD01,ref="myINDI"]
+[&Message status(selectrelation)]
+
+[&With myindi]
+   [&Assign LF02=NAM11]
+[&EndWith]
+
+[&Assign LF01="<font face="+quote+"calibri"+quote+" size="+quote+"2"+quote+"><p>Dear "+LF02+"</p>
+<cr><cr><cr><cr><cr><cr>
+<p>Kind regards</p></font>"]
+
+[&Mail to=FIL05,subject="ENTER SUBJECT",message=LF01,save,amend,html]
+
+[&Assign SRV05="yes"]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

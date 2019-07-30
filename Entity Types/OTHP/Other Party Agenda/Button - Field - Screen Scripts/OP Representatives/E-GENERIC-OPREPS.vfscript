@@ -1,0 +1,33 @@
+********************************************************************************
+***  Script Code : E-GENERIC-OPREPS
+***  Description : Generic email to OP reps
+***
+***  Created By  : Charlie Smith On 21/08/17 @ 15:25:45
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&If OPS10<>""]
+   [&Assign LF01=OPS10]
+[&Else]
+   [&Message "Email address cannot be blank"]
+   [&Quit]
+[&EndIf]
+
+[&If OPS20<>""]
+   [&Assign LF04=" - Your ref: "+OPS20]
+[&EndIf]
+
+[&SelectRelation type="OTHERPARTY_FILE",ref="myFile"]
+[&With myFile]
+   [&Assign LF04="Our ref: "+MT05+LF04]
+   [&Assign LF02=LF04+" - Incident date: "+ICD01]
+   [&Assign LF03=""]
+   [&Mail to=LF01,subject=LF02,message=LF03,save,amend,html,nofileopen]
+[&EndWith]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

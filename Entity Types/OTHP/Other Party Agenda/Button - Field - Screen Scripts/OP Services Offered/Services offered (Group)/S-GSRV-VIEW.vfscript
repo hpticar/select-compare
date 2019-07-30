@@ -1,0 +1,17 @@
+********************************************************************************
+***  Script Code : S-GSRV-VIEW
+***  Description : Services offered group - VIEW
+***
+***  Created By  : Charlie Smith On 13/10/16 @ 10:44:05
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+&Field code="SRV10",attribute="read-only",value="yes"]
+&Field code="SRV11",attribute="read-only",value="yes"]
+&Field code="SRV12",attribute="read-only",value="yes"]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

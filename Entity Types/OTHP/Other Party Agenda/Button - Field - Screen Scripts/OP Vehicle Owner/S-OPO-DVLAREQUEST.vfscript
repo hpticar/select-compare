@@ -1,0 +1,85 @@
+********************************************************************************
+***  Script Code : S-OPO-DVLAREQUEST
+***  Description : Request DVLA
+***
+***  Created By  : Oliver Funnell On 19/05/16 @ 10:33:49
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&SelectFile code=OTHERPARTY_FILE.MT05,ref="MyFile"] // select file now for use later and checking liab stance
+[&If MyFile.CLS14="Fault"] no DVLA requests on fault claims
+   [&Message "DVLA requests not permissible on Fault claims"]
+   [&Quit]
+[&EndIf]
+
+[&Assign LF04=OPV02]
+[&If LF04="" &Or LF04 &IsOneOf "TBA,Unknown,Not Known"]
+   [&Message "You cannot request a DVLA lookup without a valid vehicle registration!"]
+   [&Quit]
+[&EndIf]
+
+[&If 'Do you want to request a DVLA for the OP Vehicle?'(question)="Yes"]
+   [&Assign LF03=prompt("Enter Reason")(Choose "Cancel:Hit & Run:Damage to Vehicle:Death or Personal Injury:Damage to property:Fraud:Suspected Cloned Vehicle:Shunting or Swerving:Insurance Policy default:Credit Hire Claim Fraud:Ghost Broking:Staged Incident/Crash for Cash Fraud",no-cancel)]
+   
+   [&If LF03<>"Cancel"]
+      
+      [&Assign LF20=1] // 0=Block, 1=Allow
+      [&If LF03="Damage to Vehicle"]
+         [&If OVD02 &IsOneOf ",Select...,None"]
+            [&Assign LF20=0]
+         [&EndIf]   
+         [&If LF20=1]
+            [&Assign LF07=OVD17]
+            [&If LF07 &Begins "none" &Or LF07 &Begins "no damage" &Or LF07 &Begins "n/a"]
+               [&Assign LF20=0]
+            [&Else]
+               // do nothing already 1
+            [&EndIf]
+         [&EndIf]
+      [&EndIf]
+      
+      [&If LF20=0] // if blocked check PHV for damage
+         [&With MyFile]
+            [&If DMG02 &IsOneOf ",Select...,None"]
+               // do nothing already 0
+            [&Else]
+               [&Assign LF07=DMG18]
+               [&If LF07 &Begins "none" &Or LF07 &Begins "no damage" &Or LF07 &Begins "n/a"]
+                  // do nothing already 0
+               [&Else]
+                  [&Assign LF20=1]
+               [&EndIf]
+            [&EndIf]
+         [&EndWith]
+      [&EndIf]
+      
+      [&If LF20=1] // Proceed
+         [&Assign LF01=EN56]
+         [&With MyFile]
+           [&Assign LF05="SCH-S-WF-DVLAREQUEST-"+LF04]
+           [&Assign LF150="New DVLA Request"]
+           [&Assign LF151=US02+" created "+LF150+", due-date="+date+", priority=Critical"+", handler=DVLA Request"]
+           [&Call S-DATETIME-STAMP,output=LF152]
+           [&Schedule S-WF-DVLAREQUEST,LF150,comments=LF151,date-due=today,fee-earner="DVLA Request",priority="Critical",schedule-code=LF05]
+           [&MetaData schedule,create]
+           [&Assign AD99(1)=LF01] OP en56
+           [&Assign AD99(2)=LF03] reason
+           [&Assign AD99(3)=US02] user
+           [&History "DVLA Request submitted for "+LF04;"Reason for request: "+LF03]
+           [&Assign LF152="
+"+LF152+" "+LF151]
+           [&History "SCHEDULE created: "+LF150;LF152,user-data1="ScheduleManagement",category="Schedule Management"]
+         [&EndWith]
+         [&Message "DVLA Request has been submitted.", title="Submitted"]
+      [&Else]
+         [&Message "No OP or PH vehicle damage indicated!",title="DVLA Request Denied"]
+      [&EndIf]
+   [&EndIf]
+[&EndIf]
+
+
+********************************************************************************
+***   End of script
+********************************************************************************

@@ -1,0 +1,58 @@
+********************************************************************************
+***  Script: S-OPO-FORMATSCRN                                                ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: CB On 25/02/13                                              ***
+********************************************************************************
+LN CB 130225 Copied from MATA equivalent script
+
+&If US01="AR"]
+  &Debug]
+&EndIf]
+
+[&SelectRelation relation-field="OPO01",ref="scope"]
+[&If scope.EN06="COMM"]    *** Commercial OPO
+   [&Field code="OPO08",attribute= "label",value = "Main Contact"] ** @Contact COMM
+   [&Field code="OPO09",attribute= "label",value = "Direct Dial"]
+   [&Field code="OPO04",attribute= "script",value = "S-OPO-COMMOFFIGRID"]
+   
+   [&Field code="OPO02",attribute= "visible",value = "Yes"] ** Commercial Pointer
+   [&Field code="OPO03",attribute= "visible",value = "No"] ** INDI Pointer
+   
+   [&Field code="OPO04",attribute= "visible",value = "Yes"] ** Commercial Office
+   [&Field code="OPO05",attribute= "visible",value = "Yes"] ** Commercial Switchboard
+   [&Field code="OPO06",attribute= "visible",value = "Yes"] ** Commercial Fax
+   
+   [&Field code="OPO11",attribute= "visible",value = "No"] ** INDI Address
+   [&Field code="OPO12",attribute= "visible",value = "No"] ** INDI Daytime
+   [&Field code="OPO07",attribute= "visible",value = "No"] ** INDI Mobile
+   
+   [&Field code="OPO13",attribute= "visible",value = "No"] ** INDI contact: Evening
+   [&Field code="OPO14",attribute= "visible",value = "No"] ** INDI contact: Mobile
+   [&Field code="OPO15",attribute= "visible",value = "No"] ** INDI Contact: Fax
+
+[&Else]                        *** Private OPO
+   [&Field code="OPO08",attribute= "label",value = "Contact"] ** @Contact INDI
+   [&Field code="OPO09",attribute= "label",value = "Daytime"]
+   [&Field code="OPO04",attribute= "script",value = " "]
+
+   [&Field code="OPO02",attribute= "visible",value = "No"] ** Commercial Pointer
+   [&Field code="OPO03",attribute= "visible",value = "Yes"] ** INDI Pointer
+   
+   [&Field code="OPO04",attribute= "visible",value = "No"] ** Commercial Office
+   [&Field code="OPO05",attribute= "visible",value = "No"] ** Commercial Switchboard
+   [&Field code="OPO06",attribute= "visible",value = "No"] ** Commercial Fax
+
+   [&Field code="OPO11",attribute= "visible",value = "Yes"] ** INDI Address
+   [&Field code="OPO12",attribute= "visible",value = "Yes"] ** INDI Daytime
+   [&Field code="OPO07",attribute= "visible",value = "Yes"] ** INDI Mobile
+      
+   [&Field code="OPO13",attribute= "visible",value = "Yes"] ** Evening
+   [&Field code="OPO14",attribute= "visible",value = "Yes"] ** Mobile
+   [&Field code="OPO15",attribute= "visible",value = "Yes"] ** Fax
+
+[&EndIf]
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

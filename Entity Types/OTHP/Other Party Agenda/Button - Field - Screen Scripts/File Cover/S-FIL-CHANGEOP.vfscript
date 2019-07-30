@@ -1,0 +1,38 @@
+********************************************************************************
+***  Script Code : S-FIL-CHANGEOP
+***  Description : Change OP type
+***
+***  Created By  : Charlie Smith On 10/02/17 @ 12:18:52
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF03=SYS08]
+[&If LF03="PHVP"]
+   [&Assign LF03="IV Passenger"]
+[&EndIf]
+[&If LF03="OPVP"]
+   [&Assign LF03="OP Passenger"]
+[&EndIf]
+[&If LF03="PropertyOwner"]
+   [&Assign LF03="Property Owner"]
+[&EndIf]
+
+[&Assign LF01='Choose OP type'(choose Vehicle:Motorcycle:"IV Passenger":"OP Passenger":Witness:Pedestrian:Cyclist:"Property Owner",default=LF03)]
+[&If LF01="Property Owner"]
+   [&Assign LF01="PropertyOwner"]
+[&EndIf]
+[&If LF01="IV Passenger"]
+   [&Assign LF01="PHVP"]
+[&EndIf]
+[&If LF01="OP Passenger"]
+   [&Assign LF01="OPVP"]
+[&EndIf]
+[&Assign SYS03=LF01]
+[&Assign SYS08=LF01]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

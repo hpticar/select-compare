@@ -1,0 +1,67 @@
+********************************************************************************
+***  Script Code : S-SYS-LINKPORTAL
+***  Description : Attach Portal Claim
+***
+***  Created By  : Hrvoje Pticar On 05/08/16 @ 15:37:35
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Finder file-only,type="PORT",response=LF01,result=LF02]
+
+[&Assign LF08=""]
+[&If LF01="GO"]
+   [&SelectFile int-code=LF02,ref="myPORTAL"]
+   [&With myPORTAL]
+      [&SelectRelation type="PORT_OTHP",ref="otherOP"]
+      [&SelectAdd-In type="AI-MOJC",ref="mojca"]
+   [&EndWith]
+   [&With otherOP]
+      [&SelectRelation type="OTHERPARTY_FILE",ref="otherClaim"]
+      [&Assign LF08=status(selectrelation)]
+   [&EndWith]
+   [&CreateRelation type="OTHP_PORT",to-ref="myPORTAL"]
+   [&SelectRelation type="OTHERPARTY_FILE",ref="VFclaimXX"]
+   [&With VFclaimXX]
+      [&Assign LF06=MT11(3)]
+   [&EndWith]
+   [&With myPORTAL]
+      [&Assign MX02="FEE,"+LF06]
+      [&Call S-UPDATE-DESC]
+      [&Call S-MOJ-GETTIMEOUT]
+      [&Call S-MOJC-POPULATE-RESPINF]
+      [&If ZMA03="ClaimSubmitted"] // if claim has not been accepted yet, accept, create schedules and send rehab offer
+         [&Call S-MOJ-ACCEPTCLAIM]
+         [&Call S-HAV-INITIALSCHEDULES]
+         [&Call S-HAV-ATTACH-REHABOFFER]
+      [&EndIf]
+   [&EndWith]
+   [&With otherOP]
+      [&Assign OII01=""]
+      [&Assign OII07=""]
+      [&Assign OII02="Select..."]
+   [&EndWith]
+   [&If LF08=""]
+      [&With otherClaim]
+         [&History "Portal for OP "+otherOP.OPD03+" moved to claim "+VFclaimXX.MT05]
+      [&EndWith]
+   [&EndIf]
+   [&Assign LF07=OPD03]
+   [&With VFclaimXX]
+      [&If LF08=""]
+         [&Assign LF08=" moved from claim "+otherClaim.MT05]
+      [&Else]
+         [&Assign LF08=" allocated manually"]
+      [&EndIf]
+      [&History "Portal for OP "+LF07+LF08]
+   [&EndWith]
+   [&Message "Portal "+mojca.ZMA02+" linked to OP "+OPD03+"."]
+   
+[&EndIf]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

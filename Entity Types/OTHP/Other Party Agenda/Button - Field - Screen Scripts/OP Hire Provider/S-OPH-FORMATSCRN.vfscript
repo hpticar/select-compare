@@ -1,0 +1,41 @@
+********************************************************************************
+***  Script: S-OPH-FORMATSCRN                                                ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: SG On 17/01/13                                              ***
+********************************************************************************
+
+[&SelectRelation relation-field="OPH01",ref="scope"]
+[&If status(selectrelation)=""]
+   [&If scope.EN06="COMM"]    *** Commercial OPH
+      [&Field code="OPH08",attribute= "label",value = "Main Contact"] ** @Contact COMM
+      [&Field code="OPH09",attribute= "label",value = "Direct Dial"]
+      [&Field code="OPH04",attribute= "script",value = "S-OPH-COMMOFFIGRID"]
+      
+      [&Field code="OPH13",attribute= "visible",value = "No"] ** Private contact: Evening
+      [&Field code="OPH14",attribute= "visible",value = "No"] ** Private contact: Mobile
+      [&Field code="OPH15",attribute= "visible",value = "No"] ** Private Contact: Fax
+   [&Else]                        *** Private OPH
+      [&Field code="OPH08",attribute= "label",value = "Contact"] ** @Contact PRIV
+      [&Field code="OPH09",attribute= "label",value = "Daytime"]
+      [&Field code="OPH04",attribute= "script",value = " "]
+      
+      [&Field code="OPH13",attribute= "visible",value = "Yes"] ** Evening
+      [&Field code="OPH14",attribute= "visible",value = "Yes"] ** Mobile
+      [&Field code="OPH15",attribute= "visible",value = "Yes"] ** Fax
+   [&EndIf]
+   [&If scope.EN56=9642]
+      [&Field code="OPH26",attribute="visible",value="yes"]
+   [&Else]
+      [&Field code="OPH26",attribute="visible",value="no"]
+   [&EndIf]
+[&Else]
+   [&Field code="OPH26",attribute="visible",value="no"]
+[&EndIf]
+
+[&Field code="OPH07",attribute="read-only",value="yes"]
+
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

@@ -1,0 +1,45 @@
+********************************************************************************
+***  Script: S-VRP-FORMATSCRN                                                ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: HP On 16/07/13                                              ***
+********************************************************************************
+
+[&If SYS03 = "Pedestrian"]
+   [&Field code="VRP01",attribute="visible",value="Yes"]
+   [&Field code="VRP05",attribute="visible",value="Yes"]
+   [&Field code="VRP06",attribute="visible",value="Yes"]
+   [&Field code="VRP07",attribute="visible",value="Yes"]
+   [&Field code="VRP08",attribute="visible",value="Yes"]
+   [&Field code="VRP09",attribute="visible",value="Yes"]
+   [&Field code="VRP10",attribute="visible",value="Yes"]
+   [&Field code="VRP11",attribute="visible",value="Yes"]
+   [&Field code="VRP12",attribute="visible",value="Yes"]
+   [&Field code="VRP13",attribute="visible",value="Yes"]
+   [&Field code="VRP14",attribute="visible",value="Yes"]
+   [&Field code="VRP15",attribute="visible",value="Yes"]
+   [&Field code="VRP16",attribute="visible",value="Yes"]
+   [&Field code="VRP17",attribute="visible",value="Yes"]
+   [&Field code="VRP18",attribute="visible",value="No"]
+[&Else]
+   [&Field code="VRP01",attribute="visible",value="No"]
+   [&Field code="VRP05",attribute="visible",value="No"]
+   [&Field code="VRP06",attribute="visible",value="No"]
+   [&Field code="VRP07",attribute="visible",value="No"]
+   [&Field code="VRP08",attribute="visible",value="No"]
+   [&Field code="VRP09",attribute="visible",value="No"]
+   [&Field code="VRP10",attribute="visible",value="No"]
+   [&Field code="VRP11",attribute="visible",value="No"]
+   [&Field code="VRP12",attribute="visible",value="No"]
+   [&Field code="VRP13",attribute="visible",value="No"]
+   [&Field code="VRP14",attribute="visible",value="No"]
+   [&Field code="VRP15",attribute="visible",value="No"]
+   [&Field code="VRP16",attribute="visible",value="No"]
+   [&Field code="VRP17",attribute="visible",value="No"]
+   [&Field code="VRP18",attribute="visible",value="Yes"]
+   [&Assign VRP18="Not applicable"]
+[&EndIf]
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

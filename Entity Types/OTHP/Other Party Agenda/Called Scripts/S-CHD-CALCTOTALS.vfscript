@@ -1,0 +1,19 @@
+********************************************************************************
+***  Script Code : S-CHD-CALCTOTALS
+***  Description : Credit Hire Data Screen calculate totals
+***
+***  Created By  : Charlie Smith On 19/07/18 @ 14:01:10
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign CHD21=CHD09+CHD13+CHD17] //claiming total
+[&Assign CHD22=CHD10+CHD14+CHD18] //initial offered total
+[&Assign CHD23=CHD11+CHD15+CHD19] //current offer total
+[&Assign CHD24=CHD12+CHD16+CHD20] //settled total
+
+********************************************************************************
+***   End of Script
+********************************************************************************

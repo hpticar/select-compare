@@ -1,0 +1,50 @@
+********************************************************************************
+***  Script Code : S-CLAW-IMPORT-OPVEHLOC
+***  Description : CLAW Import OP Vehicle Location
+***
+***  Created By  : Hrvoje Pticar On 30/07/15 @ 11:26:17
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF88=GF116+"\VEHICLE.XML"]
+[&Assign LF87="search('"+LF88+"')":proval]
+[&If LF87<>""] file exists
+   [&Out GF113:date+"|"+time(seconds)+"|INFO|OTHP.S-CLAW-IMPORT-OPVEHLOC|Claim GUID: "+GF112+"|OP: "+EN02+"|---Importing VEHICLE.XML...",append]
+
+   [&Assign XL01(file)=LF88]
+   [&Select xl,type=XL01,element=VehicleType.Location,first,parent]
+   [&If status(select)=""]
+      [&Assign LF01=XL01(element=LocationInd,child)]
+      [&Assign OVD19=LF01]
+      [&If LF01:text="Other"]
+         [&Assign OVL01=XL01(element=OtherName,child)]
+         [&Select xl,type=XL01,element=VehicleType.Location.OtherAddress,first,parent]
+         [&Assign LF20=XL01(element=TypeInd,child)]
+         [&Assign LF21=XL01(element=HavenIntCode,child)]
+         [&Assign LF22=XL01(element=Address1,child)]
+         [&Assign LF23=XL01(element=Address2,child)]
+         [&Assign LF24=XL01(element=Address3,child)]
+         [&Assign LF25=XL01(element=Address4,child)]
+         [&Assign LF26=XL01(element=postcode,child)]
+         
+         [&Assign OVL04=LF22]
+         [&Assign OVL05=LF23]
+         [&Assign OVL06=LF24]
+         [&Assign OVL07=LF25]
+         [&Assign OVL08=LF26]
+         
+         [&Assign OVL09=XL01(element=VehicleType.Location.OtherComms.Method.NumberAddress)]
+      [&EndIf]
+   [&Else]
+      [&Out GF113:date+"|"+time(seconds)+"|INFO|OTHP.S-CLAW-IMPORT-OPVEHLOC|Claim GUID: "+GF112+"|OP: "+EN02+"|No VehicleLocation segment. Skip.",append]
+   [&EndIf]
+[&Else]
+   [&Out GF113:date+"|"+time(seconds)+"|INFO|OTHP.S-CLAW-IMPORT-OPVEHLOC|Claim GUID: "+GF112+"|OP: "+EN02+"|VEHICLE.XML Does not exist. Skip.",append]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

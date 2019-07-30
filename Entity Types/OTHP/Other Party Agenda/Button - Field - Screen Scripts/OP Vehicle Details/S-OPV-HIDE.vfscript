@@ -1,0 +1,18 @@
+********************************************************************************
+***  Script Code : S-OPV-HIDE
+***  Description : OP Vehicle Details hide script
+***
+***  Created By  : John Wheeler On 22/05/18 @ 11:45:39
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&If OPV02<>GF116 &And SYS03 &IsOneOf "Vehicle,Motorcycle"] GF116 assign in the onview and will contain the starting OPV reg.
+   [&Call S-OPV-MID-AUTO,input=GF116] if reg has changed call to MID
+[&EndIf]
+[&Assign GF116=""]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

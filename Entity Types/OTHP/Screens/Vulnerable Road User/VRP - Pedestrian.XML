@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VFScreenType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <screen_code>ENTITY-TYPE;OTHP,VRP</screen_code>
+  <description>Pedestrian</description>
+  <entry_order>R,5,6,7,8,9,10,11,12,13,14,15,16,17,1,18</entry_order>
+  <index_fields>,</index_fields>
+  <owner_type>ENTITY-TYPE;OTHP</owner_type>
+  <view_script>S-VRP-FORMATSCRN</view_script>
+  <hide_script />
+  <text_screen>no</text_screen>
+  <field_amend>0</field_amend>
+  <view_authority>0</view_authority>
+  <amend_authority>100</amend_authority>
+  <boxes>3.76,1.8,126,15.33,15|^|1.6,3.4,112.8,3.7,8|^|5.9,3.4,112.8,18.0,6</boxes>
+  <headers>Vulnerable Road User - Pedestrian,3.0,8.2,38.4,1.0,1,8,0,</headers>
+  <Fields>
+    <field_info fld_number="1">
+      <amend_authority>0</amend_authority>
+      <description>Physical description</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>6.71</row>
+      <length>60</length>
+      <column>26.2</column>
+      <width>86.4</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="5">
+      <amend_authority>0</amend_authority>
+      <description>Was OP under influence of alcohol or drugs</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>8.14</row>
+      <length>10</length>
+      <column>53.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="6">
+      <amend_authority>0</amend_authority>
+      <description>Was a breath/drug test conducted</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>9.29</row>
+      <length>10</length>
+      <column>53.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="7">
+      <amend_authority>0</amend_authority>
+      <description>Did Police provide any advice at the scene</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>10.43</row>
+      <length>10</length>
+      <column>53.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="8">
+      <amend_authority>0</amend_authority>
+      <description>If Yes, what advice</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>11.57</row>
+      <length>300</length>
+      <column>53.8</column>
+      <width>57.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="9">
+      <amend_authority>0</amend_authority>
+      <description>Did the Police or Insured take any Witness details</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>12.71</row>
+      <length>10</length>
+      <column>53.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="10">
+      <amend_authority>0</amend_authority>
+      <description>Was the pedestrian going through a pedestrian crossing</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>14.14</row>
+      <length>10</length>
+      <column>65.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="11">
+      <amend_authority>0</amend_authority>
+      <description>If Yes, was the crossing controlled by traffic lights</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>15.29</row>
+      <length>10</length>
+      <column>65.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="12">
+      <amend_authority>0</amend_authority>
+      <description>Were the lights on at the moment of impact</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>16.43</row>
+      <length>10</length>
+      <column>65.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="13">
+      <amend_authority>0</amend_authority>
+      <description>Light at moment of impact</description>
+      <default_value>"Select..."</default_value>
+      <options>L-FGCOLOR,0,L-BGCOLOR,6,FGCOLOR,0,BGCOLOR,15,FCAT=</options>
+      <type>T</type>
+      <selection_list>Select...,Red,Amber,Green</selection_list>
+      <row>17.57</row>
+      <length>15</length>
+      <column>65.8</column>
+      <width>36.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="14">
+      <amend_authority>0</amend_authority>
+      <description>Was there any pedestrian crossing near the place of incident</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>18.71</row>
+      <length>10</length>
+      <column>65.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="15">
+      <amend_authority>0</amend_authority>
+      <description>Was there a bus stop near the place of incident</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>19.86</row>
+      <length>10</length>
+      <column>65.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="16">
+      <amend_authority>0</amend_authority>
+      <description>Was OP carrying items affecting his/her vision</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>21</row>
+      <length>10</length>
+      <column>65.8</column>
+      <width>13.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="17">
+      <amend_authority>0</amend_authority>
+      <description>If Yes, which items</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>22.14</row>
+      <length>300</length>
+      <column>65.8</column>
+      <width>46.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="18">
+      <amend_authority>950</amend_authority>
+      <description>@Info Line</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,6,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>13.67</row>
+      <length>60</length>
+      <column>49.4</column>
+      <width>32.2</width>
+      <pointer />
+    </field_info>
+  </Fields>
+</VFScreenType>

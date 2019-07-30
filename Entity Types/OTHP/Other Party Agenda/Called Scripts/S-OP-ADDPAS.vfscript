@@ -1,0 +1,41 @@
+********************************************************************************
+***  Script: S-OP-ADDPAS                                                     ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: SG On 22/01/13                                              ***
+********************************************************************************
+
+[&Assign OPD20=TF01] Their Reference
+
+[&If SYS03="OPVP"] This will overwrite Their Reference if they're a passenger
+   [&Assign SYS02=SYS02+" - New Passenger in OPV"]
+   [&Assign OPD20="Passenger in OPV"]
+[&Else]
+   [&If SYS03="PHVP"]
+      [&Assign SYS02=SYS02+" - New Passenger in IV"]
+      [&Assign OPD20="Passenger in IV"]
+   [&EndIf]
+[&EndIf]
+
+[&Assign OPD26="Yes"] Witness?
+[&Assign OPD27='Is the passenger an independent witness?'(q)]
+[&Assign OPD29='Was the passenger fare paying?'(q)]
+[&UserInput prompt="Enter witness location",result=LF01,no-cancel]
+[&Assign OPD30=LF01]
+[&Show OPD,no-cancel,no-help,title=SYS02] OP Details
+[&Call UENAME]
+
+** Set Window Title    
+[&Assign SYS02 = SYS01+" - OP Passenger: "+OPD03] << Passenger is an INDI
+
+[&If MATA.POL02="Fleet" &Or MATA.POL02="Taxi"]
+   [&If OPD29="No"] Fare paying?
+      [&Assign OPD26="Yes"] Witness?
+      [&Show OPD,no-cancel,no-help,title=SYS02] 
+   [&EndIf]    
+[&EndIf]
+[&CreateRole type="WITNESS"]
+
+*** AMENDMENTS *****************************************************************
+** HP 2013-06-20 - Added check for determining what Window Title to use (LF01)
+** HP 2013-06-17 - Added Their Reference

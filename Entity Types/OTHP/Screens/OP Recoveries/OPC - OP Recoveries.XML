@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VFScreenType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <screen_code>ENTITY-TYPE;OTHP,OPC</screen_code>
+  <description>Other Party Recovery History</description>
+  <entry_order>R,16,12,1,17,13,2,18,3,19,15,4,5,6,7,8,9,10,20,21,11,14</entry_order>
+  <index_fields>,</index_fields>
+  <owner_type>ENTITY-TYPE;OTHP</owner_type>
+  <view_script>S-OPC-VIEW</view_script>
+  <hide_script>S-OPC-HIDE</hide_script>
+  <text_screen>no</text_screen>
+  <field_amend>0</field_amend>
+  <view_authority>900</view_authority>
+  <amend_authority>100</amend_authority>
+  <boxes>3.76,1.8,126,15.33,15|^|1.3,2.2,100.8,5.4,6|^|7.0,3.4,99.6,8.6,6|^|19.0,2.2,100.8,2.3,6|^|21.6,2.2,100.8,2.3,6|^|15.9,2.2,100.8,2.8,6</boxes>
+  <headers>OP Recovery History Details,1.6,3.4,34.2,1.0,1,6,0,</headers>
+  <Fields>
+    <field_info fld_number="1">
+      <amend_authority>950</amend_authority>
+      <description>Date</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>D</type>
+      <selection_list />
+      <row>2.95</row>
+      <length>16</length>
+      <column>25</column>
+      <width>16</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="2">
+      <amend_authority>950</amend_authority>
+      <description>Time</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>M</type>
+      <selection_list />
+      <row>4.1</row>
+      <length>16</length>
+      <column>25</column>
+      <width>16</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="3">
+      <amend_authority>950</amend_authority>
+      <description>User</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>5.24</row>
+      <length>60</length>
+      <column>25</column>
+      <width>27.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="4">
+      <amend_authority>0</amend_authority>
+      <description>From</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>7.52</row>
+      <length>100</length>
+      <column>25</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="5">
+      <amend_authority>900</amend_authority>
+      <description>Amount £</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>N</type>
+      <selection_list />
+      <row>8.57</row>
+      <length>15</length>
+      <column>25</column>
+      <width>15</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="6">
+      <amend_authority>0</amend_authority>
+      <description>Type</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list>Select...,Cheque,BACS,Faster Payment,Cash,Other</selection_list>
+      <row>9.67</row>
+      <length>60</length>
+      <column>25</column>
+      <width>28.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="7">
+      <amend_authority>0</amend_authority>
+      <description>Payment Reference</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>10.71</row>
+      <length>40</length>
+      <column>25</column>
+      <width>28.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="8">
+      <amend_authority>0</amend_authority>
+      <description>Our Bank Book No.</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>11.76</row>
+      <length>20</length>
+      <column>25</column>
+      <width>28.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="9">
+      <amend_authority>0</amend_authority>
+      <description>Their Reference</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>12.86</row>
+      <length>40</length>
+      <column>25</column>
+      <width>28.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="10">
+      <amend_authority>0</amend_authority>
+      <description>Comment</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>13.91</row>
+      <length>200</length>
+      <column>25</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="11">
+      <amend_authority>950</amend_authority>
+      <description>Reserve Type</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>19.67</row>
+      <length>51</length>
+      <column>25</column>
+      <width>28.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="12">
+      <amend_authority>900</amend_authority>
+      <description>Read Only</description>
+      <default_value>Yes</default_value>
+      <options>FONT,?,FGCOLOR,6,BGCOLOR,6,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>C</type>
+      <selection_list />
+      <row>1.86</row>
+      <length>3</length>
+      <column>79.4</column>
+      <width>3</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="13">
+      <amend_authority>900</amend_authority>
+      <description>Recovery Sequence</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,6,BGCOLOR,6,L-FONT,?,L-FGCOLOR,6,L-BGCOLOR,6</options>
+      <type>T</type>
+      <selection_list />
+      <row>3.05</row>
+      <length>20</length>
+      <column>79.2</column>
+      <width>20.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="14">
+      <amend_authority>0</amend_authority>
+      <description>CANCEL and DELETE this recovery record</description>
+      <default_value>No</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,PROCESS,S-OPC-CANCEL</options>
+      <type>C</type>
+      <selection_list />
+      <row>22.19</row>
+      <length>3</length>
+      <column>25</column>
+      <width>3</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="15">
+      <amend_authority>0</amend_authority>
+      <description>Static Image</description>
+      <default_value />
+      <options>HEIGHT,8.0,ACTUALHEIGHT,L-FGCOLOR,0,L-BGCOLOR,8,BT-IMAGE,lnimg\haven\Cancelled.jpg</options>
+      <type>S</type>
+      <selection_list />
+      <row>7.29</row>
+      <length>0</length>
+      <column>13</column>
+      <width>81.4</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="16">
+      <amend_authority>0</amend_authority>
+      <description>Cancelled</description>
+      <default_value>No</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>C</type>
+      <selection_list />
+      <row>1.86</row>
+      <length>3</length>
+      <column>62.2</column>
+      <width>3</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="17">
+      <amend_authority>0</amend_authority>
+      <description>Date Cancelled</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>D</type>
+      <selection_list />
+      <row>3</row>
+      <length>16</length>
+      <column>68.2</column>
+      <width>16</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="18">
+      <amend_authority>0</amend_authority>
+      <description>Time Cancelled</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>M</type>
+      <selection_list />
+      <row>4.14</row>
+      <length>16</length>
+      <column>68.2</column>
+      <width>16</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="19">
+      <amend_authority>0</amend_authority>
+      <description>Cancelled By</description>
+      <default_value>""</default_value>
+      <options>FONT,1,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>5.29</row>
+      <length>60</length>
+      <column>68.2</column>
+      <width>30</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="20">
+      <amend_authority>950</amend_authority>
+      <description>Process</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>16.14</row>
+      <length>60</length>
+      <column>25</column>
+      <width>28.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="21">
+      <amend_authority>950</amend_authority>
+      <description>Process Ref</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>17.29</row>
+      <length>60</length>
+      <column>25</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+  </Fields>
+</VFScreenType>

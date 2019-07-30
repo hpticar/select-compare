@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VFScreenType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <screen_code>ENTITY-TYPE;OTHP,PMP</screen_code>
+  <description>Payment Pack</description>
+  <entry_order>S,17,18,19,23,2,1,3,4,21,5,6,7,20,8,9,10,11,12,13,14,15,16,22,24</entry_order>
+  <index_fields>,</index_fields>
+  <owner_type>ENTITY-TYPE;OTHP</owner_type>
+  <view_script>S-PMP-VIEW</view_script>
+  <hide_script />
+  <text_screen>no</text_screen>
+  <field_amend>0</field_amend>
+  <view_authority>850</view_authority>
+  <amend_authority>0</amend_authority>
+  <boxes>3.76,1.8,126,15.33,15|^|1.6,3.4,114.0,4.3,8|^|12.4,8.2,103.2,0.3,14|^|20.4,8.4,103.4,0.3,14|^|6.1,3.4,114.0,22.1,6</boxes>
+  <headers>Payment Pack Summary,2.7,7.0,33.6,1.1,1,8,0,|^|Intervention Letter:,13.0,8.2,21.6,1.0,1,6,0,|^|Payment Pack Offer:,20.8,8.2,22.8,1.0,1,6,0,|^|Claiming,21.9,47.8,10.8,1.0,1,6,0,|^|Offered,21.9,65.8,10.8,1.0,1,6,0,</headers>
+  <Fields>
+    <field_info fld_number="1">
+      <amend_authority>0</amend_authority>
+      <description>Hire Started</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>D</type>
+      <selection_list />
+      <row>8.43</row>
+      <length>16</length>
+      <column>51.4</column>
+      <width>16.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="2">
+      <amend_authority>0</amend_authority>
+      <description>Was the OP vehicle repairable or a total loss?</description>
+      <default_value>"Select..."</default_value>
+      <options>L-FGCOLOR,0,L-BGCOLOR,6,FGCOLOR,0,BGCOLOR,15,FCAT=</options>
+      <type>T</type>
+      <selection_list>Select...,Repairable,Total Loss</selection_list>
+      <row>7</row>
+      <length>16</length>
+      <column>51.4</column>
+      <width>16.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="3">
+      <amend_authority>0</amend_authority>
+      <description>Hire Ended</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,PROCESS,S-PMP-DURATION</options>
+      <type>D</type>
+      <selection_list />
+      <row>9.57</row>
+      <length>16</length>
+      <column>51.4</column>
+      <width>16.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="4">
+      <amend_authority>0</amend_authority>
+      <description>Duration of Hire</description>
+      <default_value>"0"</default_value>
+      <options>L-FGCOLOR,0,L-BGCOLOR,6,FGCOLOR,0,BGCOLOR,15,WHOLE</options>
+      <type>N</type>
+      <selection_list />
+      <row>10.71</row>
+      <length>15</length>
+      <column>51.4</column>
+      <width>16.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="5">
+      <amend_authority>0</amend_authority>
+      <description>ABI Group</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=,PROCESS,S-PMP-CODES</options>
+      <type>T</type>
+      <selection_list />
+      <row>9.57</row>
+      <length>60</length>
+      <column>89.8</column>
+      <width>21.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="6">
+      <amend_authority>0</amend_authority>
+      <description>Has the Intervention Letter been sent to the OP directly?</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>14.43</row>
+      <length>60</length>
+      <column>69.4</column>
+      <width>19.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="7">
+      <amend_authority>0</amend_authority>
+      <description>Has the Intervention Letter been signed for by the claimant?</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>15.57</row>
+      <length>60</length>
+      <column>69.4</column>
+      <width>19.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="8">
+      <amend_authority>0</amend_authority>
+      <description>Is there basic hire evidence on the file?</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>17.86</row>
+      <length>60</length>
+      <column>69.4</column>
+      <width>19.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="9">
+      <amend_authority />
+      <description>Duration of Hire</description>
+      <default_value />
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>P</type>
+      <selection_list />
+      <row>23.1</row>
+      <length>15</length>
+      <column>47.8</column>
+      <width>15.6</width>
+      <pointer>PMP04,N,,</pointer>
+    </field_info>
+    <field_info fld_number="10">
+      <amend_authority>0</amend_authority>
+      <description>Credit Hire £</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,PROCESS,S-PMP-GLOBAL</options>
+      <type>N</type>
+      <selection_list />
+      <row>24.24</row>
+      <length>15</length>
+      <column>47.8</column>
+      <width>15.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="11">
+      <amend_authority>0</amend_authority>
+      <description>Credit Repair, Recovery and Storage</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,PROCESS,S-PMP-GLOBAL</options>
+      <type>N</type>
+      <selection_list />
+      <row>25.38</row>
+      <length>15</length>
+      <column>47.8</column>
+      <width>15.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="12">
+      <amend_authority>0</amend_authority>
+      <description>Global £</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>N</type>
+      <selection_list />
+      <row>26.52</row>
+      <length>15</length>
+      <column>47.8</column>
+      <width>15.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="13">
+      <amend_authority>0</amend_authority>
+      <description>@Duration Offered</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>23.1</row>
+      <length>60</length>
+      <column>65.8</column>
+      <width>15.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="14">
+      <amend_authority>0</amend_authority>
+      <description>@Credit Hire Offered</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,PROCESS,S-PMP-GLOBALOFFERED</options>
+      <type>N</type>
+      <selection_list />
+      <row>24.24</row>
+      <length>15</length>
+      <column>65.8</column>
+      <width>15.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="15">
+      <amend_authority>0</amend_authority>
+      <description>@CH,C&amp;S Offered</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,PROCESS,S-PMP-GLOBALOFFERED</options>
+      <type>N</type>
+      <selection_list />
+      <row>25.38</row>
+      <length>15</length>
+      <column>65.8</column>
+      <width>15.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="16">
+      <amend_authority>0</amend_authority>
+      <description>@Global Offered</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6</options>
+      <type>N</type>
+      <selection_list />
+      <row>26.52</row>
+      <length>15</length>
+      <column>65.8</column>
+      <width>15.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="17">
+      <amend_authority>0</amend_authority>
+      <description>Date Reviewed</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,8</options>
+      <type>D</type>
+      <selection_list />
+      <row>2.14</row>
+      <length>16</length>
+      <column>87.4</column>
+      <width>16</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="18">
+      <amend_authority>0</amend_authority>
+      <description>Date Settled</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,8,PROCESS,S-PMP-DATESETTLED</options>
+      <type>D</type>
+      <selection_list />
+      <row>3.29</row>
+      <length>16</length>
+      <column>87.4</column>
+      <width>16</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="19">
+      <amend_authority>0</amend_authority>
+      <description>Payment Pack Handler</description>
+      <default_value>EN54</default_value>
+      <options>L-FGCOLOR,0,L-BGCOLOR,8,FGCOLOR,0,BGCOLOR,15</options>
+      <type>L</type>
+      <selection_list />
+      <row>4.43</row>
+      <length>16</length>
+      <column>87.4</column>
+      <width>16</width>
+      <pointer>FEE</pointer>
+    </field_info>
+    <field_info fld_number="20">
+      <amend_authority>0</amend_authority>
+      <description>Receipt of intervention letter confirmed by phone?</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list>Select...,Yes,No</selection_list>
+      <row>16.71</row>
+      <length>60</length>
+      <column>69.4</column>
+      <width>19.2</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="21">
+      <amend_authority>0</amend_authority>
+      <description>Solictors</description>
+      <default_value>"Select..."</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list>Select...,Flint Bishop,Keoghs</selection_list>
+      <row>7.62</row>
+      <length>60</length>
+      <column>89.6</column>
+      <width>21.4</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="22">
+      <amend_authority>0</amend_authority>
+      <description>Remove all Payment Pack info</description>
+      <default_value />
+      <options>PROCESS,S-REMOVE-PMP</options>
+      <type>O</type>
+      <selection_list />
+      <row>29.95</row>
+      <length>0</length>
+      <column>47.4</column>
+      <width>34</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="23">
+      <amend_authority>0</amend_authority>
+      <description>Realistic Reserve Review</description>
+      <default_value>No</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,8</options>
+      <type>C</type>
+      <selection_list />
+      <row>4.14</row>
+      <length>3</length>
+      <column>7</column>
+      <width>3</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="24">
+      <amend_authority>0</amend_authority>
+      <description>Screen transferred</description>
+      <default_value>No</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,8</options>
+      <type>C</type>
+      <selection_list />
+      <row>4.14</row>
+      <length>3</length>
+      <column>37</column>
+      <width>3</width>
+      <pointer />
+    </field_info>
+  </Fields>
+</VFScreenType>

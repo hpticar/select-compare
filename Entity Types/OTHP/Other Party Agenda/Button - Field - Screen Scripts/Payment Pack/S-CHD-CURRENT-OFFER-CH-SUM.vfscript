@@ -1,0 +1,30 @@
+********************************************************************************
+***  Script Code : S-CHD-CURRENT-OFFER-CH-SUM
+***  Description : Added up Current Offer Amounts
+***
+***  Created By  : John Wheeler On 25/06/18 @ 16:20:21
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&Assign LF01=0] Daily Hire rate
+[&Assign LF02=0] Hire duration
+[&Assign LF03=0] total amount of Hire
+[&Assign LF04=0] Repair cost
+[&Assign LF05=0] storage cost
+
+[&Assign LF01=CHD03]
+[&Assign LF02=CHD07]
+[&Assign LF03=LF01*LF02]
+[&Assign LF04=CHD15]
+[&Assign LF05=CHD19]
+
+[&Assign CHD11=LF03]
+[&Assign CHD23=LF06]
+
+[&Call S-CHD-CALCTOTALS]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

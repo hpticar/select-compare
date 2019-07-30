@@ -1,0 +1,26 @@
+********************************************************************************
+***  Script Code : S-EMS-VIEW
+***  Description : Emergency Services Details View Screen
+***
+***  Created By  : Andy Janes On 05/12/13 @ 11:49:34
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+      ** Enter Script Description/Usage Info Here For Reference **
+
+** Assign Local Variables
+ &Assign LF100=""]                        ** First Variable
+ &Assign LF101=""]                        ** Second Variable
+
+
+
+
+
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************
