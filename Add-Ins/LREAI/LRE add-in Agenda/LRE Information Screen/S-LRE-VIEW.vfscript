@@ -1,0 +1,144 @@
+********************************************************************************
+***  Script Code : S-LRE-VIEW
+***  Description : LRE Screen view script
+***
+***  Created By  : Charlie Smith On 16/08/19 @ 15:38:53
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&Assign LF01=""] //one/multiple parties marker
+[&Assign LF03="01/01/1900"] //set inidial date for comparing when installment plans were created
+[&Assign LF04=""] // group index
+[&Assign LF05=""] // marker for found active installment plan
+[&Assign LF06=""] //error message(s) capture
+[&Assign LF07=""] // installment plan status
+[&Assign LF08=0] // PH INDI EN56
+[&Assign LF09=0] // Driver EN56
+[&SelectEntity type="ADMI",ref="myAdmi"]
+
+[&If LRE20="" &Or LRE01=""] //ensure party selected and details populated
+   [&Assign LRE20="Policyholder"] // 
+[&EndIf]
+
+[&Call S-CALC-OUTSTANDINGPAID]
+[&If LRE07 &IsOneOf "Abandoned,Paid in Full"] //Set whole screen read only
+   [&Field code="LRE",attribute="read-only",value="Yes"]
+[&Else]   
+   [&Field code="LRE01",attribute="read-only",value="Yes"] //name and address
+   [&Field code="LRE02",attribute="read-only",value="Yes"] //telephone numbers
+   [&Field code="LRE03",attribute="read-only",value="Yes"] //email
+   [&Field code="LRE04",attribute="read-only",value="Yes"] //outstanding
+   [&Field code="LRE05",attribute="read-only",value="Yes"] //paid
+   [&Field code="LRE06",attribute="read-only",value="Yes"] //discount
+   [&Field code="LRE07",attribute="read-only",value="Yes"] //LRE status
+   [&Field code="LRE12",attribute="read-only",value="Yes"] //Autuo workflow
+   [&Field code="LRE14",attribute="read-only",value="Yes"] //*Instalment plan info
+   [&Field code="LRE15",attribute="read-only",value="Yes"]
+   [&Field code="LRE16",attribute="read-only",value="Yes"]
+   [&Field code="LRE17",attribute="read-only",value="Yes"]
+   [&Field code="LRE18",attribute="read-only",value="Yes"]
+   [&Field code="LRE19",attribute="read-only",value="Yes"] 
+   [&Field code="LRE21",attribute="read-only",value="Yes"]  *//
+[&EndIf]
+
+[&With owner]
+   [&SelectRelation type="CLIENT_CLIENT",ref="PH"]
+   [&If status(selectrelation)=""]
+      [&If PH.EN06="PRIV"]
+         [&SelectRelation relation-field=PH.CLI07,ref="PHIndi"]
+         [&If status(selectrelation)=""]
+            [&Assign LF08=PHIndi.EN56]
+            [&SelectRelation relation-field=DRV01,ref="myDriver"]
+            [&If status(selectrelation)=""]
+               [&Assign LF09=myDriver.EN56]
+               [&If LF08=LF09]
+                  [&Assign LF01="oneParty"] 
+               [&Else]
+                  [&Assign LF01="multipleParties"]
+               [&EndIf]
+            [&Else]
+                [&Assign LF01="oneParty"]   
+            [&EndIf]   
+         [&Else]
+            [&Assign LF06=LF06+"Failed to select Policyholder.  Contact IT."]
+         [&EndIf]
+      [&Else]
+         [&SelectRelation relation-field=DRV01,ref="myDriver"]
+         [&If status(selectrelation)=""]
+            [&Assign LF01="multipleParties"]
+         [&Else]
+            [&Assign LF01="oneParty"]    
+         [&EndIf]   
+      [&EndIf]
+   [&Else]  
+       [&Assign LF06=LF06+"Failed to select Policyholder.  Contact IT."]
+    [&EndIf]
+       
+   [&Assign LF10=PHO03] // {PH name
+   [&Assign LF12=PHO10]// PH email
+   [&If PHO14<>""]//PH phone number
+      [&Assign LF11=PHO14]
+   [&Else]
+      [&Assign LF11=PHO09]   
+   [&EndIf] 
+[&EndWith]   
+      
+[&If LF01="oneParty"]
+   [&Field code="LRE20",attribute="visible",value="No"] //don't show party selection if no driver/driver is PH
+   //revert details to PH if driver has been removed
+   [&Assign LRE01=LF10] //PH name
+   [&Assign LRE02=LF11] //PH phone number
+   [&Assign LRE03=LF12] //PH email
+[&Else]
+   [&Call S-LRE-SELECTPARTY]
+[&EndIf]
+
+[&ForEach GINS]
+   [&If INS01="Select..." &And INS02=0]//Remove blank screens
+      [&Delete GINS]
+   [&EndIf]
+   [&Assign LF07=INS01]
+   [&If LF07="Active"]
+      [&Assign LF05="found"]
+      [&Group code="GINS",action="getindex", result=LF04]
+   [&Else]
+      //handle grabbing most recent GIN that is not active
+      [&If LF07<>""]
+         [&If LF03<=INS07]
+            [&Assign LF03=INS07] //Marker for most recent failed payment plan
+            [&Group code="GINS",action="getindex", result=LF04]
+            [&Assign LF05="found"]
+         [&EndIf]
+      [&EndIf]
+   [&EndIf]      
+[&EndFor]
+
+[&If LF05="found"] 
+   [&Group code="GINS",action="setindex",index=LF04]   
+   [&Call S-INS-INSTALMENTS-FINALPAYMENT,input="view"]
+   [&Assign LRE14=INS01]
+   [&Assign LRE15=INS02]
+   [&Assign LRE16=INS03]
+   [&Assign LRE17=INS04]
+   [&Assign LRE18=INS05]
+   [&Assign LRE19=INS06]
+   [&Assign LRE21=INS07]
+[&Else]
+   [&Assign LRE14="No Instalment Plan"]// no active installment plan found
+   [&Assign LRE15=""]
+   [&Assign LRE16=""]
+   [&Assign LRE17=""]
+   [&Assign LRE18=""]
+   [&Assign LRE19=""]
+   [&Assign LRE21=""]
+[&EndIf]
+
+[&If LF06<>""]
+   [&Message LF06,title="System error!"]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

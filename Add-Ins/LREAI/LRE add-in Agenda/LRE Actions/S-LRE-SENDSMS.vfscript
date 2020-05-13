@@ -1,0 +1,25 @@
+********************************************************************************
+***  Script Code : S-LRE-SENDSMS
+***  Description : Send SMS
+***
+***  Created By  : Charlie Smith On 16/08/19 @ 15:54:07
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&If LRE20="Policyholder"]
+   [&Call owner.S-PHO-SENDSMS]
+[&Else]
+   [&Call owner.S-DRV-SENDSMS]
+[&EndIf]
+
+[&With owner]
+   [&Select hs:last]
+   [&Category type="H",ownercode=HS26,parentcode=MT30,description="Documents and notes;Policyholder;Policyholder\Outgoing;LRE"]
+[&EndWith]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

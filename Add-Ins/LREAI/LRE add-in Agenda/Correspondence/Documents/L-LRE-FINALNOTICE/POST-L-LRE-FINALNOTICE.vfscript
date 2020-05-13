@@ -1,0 +1,28 @@
+********************************************************************************
+***  Script Code : POST-L-LRE-FINALNOTICE
+***  Description : 
+***
+***  Created By  : Charlie Smith On 09/09/19 @ 16:51:25
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&History "LRE - Final Notice to "+LRE20,category="Policyholder;Policyholder\Outgoing;LRE;Documents and Notes",save,noconfirm]
+
+[&With owner]
+   [&Assign LF07=date+7(days)]
+   [&Assign LF498="Response to Final Notice?"]
+   [&Assign LF151=US02+" created "+LF498+", due-date="+LF07+", priority=normal, handler=LRE"]
+   [&Call S-SCHEDULE-CODES,output=LF600]
+   [&Schedule SCH-S-LRE-RESPONSE-FINAL-NOTIC,LF498,date-due=LF07,category="LRE",fee-earner="LRE",schedule-code="SCH-S-LRE-RESPONSE-FINAL-NOTIC"+LF600]
+   [&Call S-DATETIME-STAMP,output=LF152]
+   [&Assign LF152="<CR>"+LF152+" "+LF151]
+   [&History "SCHEDULE created: "+LF498;LF152,user-data1="ScheduleManagement",category="Schedule Management"]
+[&EndWith]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

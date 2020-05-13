@@ -1,0 +1,47 @@
+********************************************************************************
+***  Script Code : S-LRE-SENDLETTER
+***  Description : Send Letter
+***
+***  Created By  : Charlie Smith On 16/08/19 @ 16:02:32
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF01=""] //Document code of selected letter
+[&Assign LF02=""] //Grid - user response
+[&Assign LF03=""] payment installment group status
+[&Call S-LRE-GETINSTALMENTGROUPINDEX,output=LF03]
+
+[&Grid action="delete"]
+[&Grid action="create"]
+[&Grid action="create-col",name="Document Name",type="char",format="X(75)"]
+[&Grid action="create-col",name="Document Code",type="char",format="X(75)",hidden,key]
+
+[&SelectEntity type="ADMI",ref="myAdmi"]
+[&With myAdmi]
+   [&ForEach TEMPLATE_TEMPLATE,noincludeall]
+      [&With TEMPLATE_TEMPLATE]
+         [&If DOC07="LRE"]
+            [&If DOC02="L-LRE-INSTALMENTPLANCONFIRM" &And LF03<>"Active"] 
+               // don't show installment plan letter with no active installment plan
+            [&Else]
+               [&Grid action="create-row"]
+               [&Assign GR01=DOC01] Document description
+               [&Assign GR02=DOC02] Document Code      
+            [&EndIf]
+         [&EndIf]
+      [&EndWith]
+   [&EndFor]
+[&EndWith]  
+
+[&Grid action="display",rows=4,result=LF01,response=LF02]
+
+[&If LF02="button2" &Or LF02="GO"]
+   [&Call LF01]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

@@ -1,0 +1,24 @@
+********************************************************************************
+***  Script Code : S-LRE-TAKEPAYMENT
+***  Description : Take Payment
+***
+***  Created By  : John Wheeler On 16/09/19 @ 09:11:53
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&Assign LF01=0] // Amounter entered
+[&DoWhile LF01<=0]
+   [&Assign LF01='Enter the amount of the payment'(number)]
+   [&If LF01<=0]
+      [&Message "Please enter an amount greater than 0!",title="Invalid amount entered!"]
+   [&EndIf]
+[&EndDoWhile]
+
+[&History "LRE payment received - £"+LF01,category="Policyholder;Claim Notes;Documents and Notes;LRE"]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

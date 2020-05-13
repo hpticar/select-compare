@@ -1,0 +1,26 @@
+********************************************************************************
+***  Script Code : S-CALC-OUTSTANDINGPAID
+***  Description : Calculate Outstanding/Paid
+***
+***  Created By  : Charlie Smith On 27/08/19 @ 14:08:56
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&Assign LF01=0] // paid amount
+
+[&With owner]
+   [&ForEach GREC,REC14="no"]
+      [&If REC11 &Contains "LRE"]
+         [&Assign LF01=LF01+REC05]
+      [&EndIf]
+   [&EndFor]
+[&EndWith]
+
+[&Assign LRE04=DAT01-LF01-LRE06] 
+[&Assign LRE05=LF01]    
+
+********************************************************************************
+***   End of Script
+********************************************************************************

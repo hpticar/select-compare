@@ -1,0 +1,75 @@
+********************************************************************************
+***  Script Code : PRE-L-LRE-INSTALMENTPLANCONFIRM
+***  Description : 
+***
+***  Created By  : John Wheeler On 17/09/19 @ 09:21:20
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF01=""] // address
+[&Assign LF02=""] // salutation
+[&Assign LF03=""] // their ref (policy number)
+[&Assign LF04=""] // Vehicle reg
+[&Assign LF05=""] // Incident date
+[&Assign LF06=""] // Driver details
+[&Assign LF07=""] // sign off
+[&Assign LF08=""] // installment plan status
+[&Assign LF09=""] // installment plan group index
+[&Assign LF10=""] // payment frequency
+[&Assign LF11=""] // "amount per frequency"
+[&Assign LF12=""] // duration of payments
+[&Assign LF13=""] // day name/date of month due
+[&Assign LF14=""] // LF13+each week/month
+[&Assign LF15=""] // Payment method - manual/automatic
+[&Assign LF16=""] // para 3 text
+[&Assign LF17=""] // Haven Bank details (manual only)
+[&Assign LF18=0]//Final installment amount
+[&Assign LF19=""]//Final instalment message
+[&Assign LF20=0]
+
+[&Call S-LRE-LETTERHEADER,output=LF01,output=LF02,output=LF03,output=LF04,output=LF05,output=LF06,output=LF07]
+
+[&Call S-LRE-GETINSTALMENTGROUPINDEX,output=LF08,output=LF09]
+[&If LF08="Active"]
+   [&Group code="GINS",action="Setindex",index=LF09]
+   [&Assign LF10=INS03]
+   [&Assign LF13=INS04]
+   [&Assign LF15=INS05]
+   [&Assign LF18=INS08]
+   [&Assign LF20=INS02]
+   [&If LF10="Weekly"]
+      [&Assign LF11=LF20+" per week"]
+      [&Assign LF12=INS06+" weeks"]
+      [&Assign LF14=LF13:ds("DN")]
+      [&Assign LF14=LF14+" each week"]
+   [&Else]
+      [&If LF10="Monthly"]
+         [&Assign LF11=LF20+" per calendar month"]
+         [&Assign LF12=INS06+" months"]
+         [&Assign LF14=LF13:ds("DW")]
+         [&Assign LF14=LF14+" of each month"]     
+      [&EndIf]      
+   [&EndIf]
+   //Start
+   [&If LF20<>LF18]
+      [&Assign LF19="and a one-off payment of £"+LF18+ " "]
+   [&EndIf]
+   //End
+   [&If LF15="Manual"]
+      [&Assign LF16="Please make these payments to the below account:"]
+      [&Assign LF17="Bank:  Natwest<CR>Account Name:  Haven Claims Account<CR>A/C:  84151455<CR>Sort Code:  60-04-02"] //separate field as needs different formatting
+   [&Else]
+      [&Assign LF16="These payments will be taken automatically from the credit/debit card you have provided us with."]
+   [&EndIf]
+[&Else]
+   // letter will be hidden when no active installment plan
+   // should not be able to reach this block  
+[&EndIf]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

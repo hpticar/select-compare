@@ -1,0 +1,49 @@
+********************************************************************************
+***  Script Code : S-INS-INSTALMENTS-FINALPAYMENT
+***  Description : LRE Instalment Plan - payments remaining/final amount
+***
+***  Created By  : Charlie Smith On 16/08/19 @ 15:35:40
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign LF01=0] //number of instalments
+[&Assign LF02=0] //number of instalments whole number
+[&Assign LF03=0] //number of instalments decimals
+[&Assign LF04=LRE04] //outstanding amount
+[&Assign LF05=INS02] //instalment amount
+[&Assign LF06=PI01] //
+
+[&If LF04>0] //if there is still LRE outstanding
+   [&If LF05>LF04] //if instalment greater than outstanding
+      [&If LF06="discount" &Or LF06="autoRecoveries"]
+         [&Assign INS06=1]    // one instalment due
+         [&Assign INS08=LF04] // of final instalment amount
+      [&Else]
+         [&Message "You have entered an instalment amount that is greater than the outstanding amount.  The instalment amount has been reset to zero."]
+         [&Assign INS02=0]
+      [&EndIf]
+   [&Else]
+      [&If INS03<>"select..." &And LF05>0]
+         [&Assign LF01=LF04/LF05] //outstanding/instalment amount
+         [&Assign LF02=LF01:whole]
+         [&Assign LF03=LF01:decimal] // get the decimals
+         [&Assign LF03=LF03:whole]
+         [&If LF03>0]
+            [&Assign INS06=LF02+1]
+            [&Assign INS08=LF04-(LF05*LF02)]
+         [&Else]
+            [&Assign INS06=LF02]
+            [&Assign INS08=LF05]     
+         [&EndIf]
+      [&EndIf]   
+   [&EndIf]
+[&Else]
+   [&Assign INS06=0]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

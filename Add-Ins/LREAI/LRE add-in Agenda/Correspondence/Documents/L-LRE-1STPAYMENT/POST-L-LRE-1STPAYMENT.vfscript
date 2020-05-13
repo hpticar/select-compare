@@ -1,0 +1,16 @@
+********************************************************************************
+***  Script Code : POST-L-LRE-1STPAYMENT
+***  Description : 
+***
+***  Created By  : Charlie Smith On 09/09/19 @ 16:43:56
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&History "LRE - 1st Payment Request Letter to "+LRE20,category="Policyholder;Policyholder\Outgoing;LRE;Documents and Notes",save,noconfirm]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

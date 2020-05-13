@@ -1,0 +1,16 @@
+********************************************************************************
+***  Script Code : POST-L-LRE-INSTALMENTPLANCONFIRM
+***  Description : 
+***
+***  Created By  : John Wheeler On 17/09/19 @ 12:11:40
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&History "LRE - Instalment Agreement Confirmation to "+LRE20,category="Policyholder;Policyholder\Outgoing;LRE;Documents;Documents and Notes",save,noconfirm]
+
+********************************************************************************
+***   End of Script
+********************************************************************************
