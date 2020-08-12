@@ -1,0 +1,34 @@
+********************************************************************************
+***  Script: CREATE-ENTITY                                                   ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: MB On 07/03/06                                              ***
+********************************************************************************
+[&Assign LF01="Global Administration Entity"] *** search string
+[&Assign LF02=0] *** selection
+[&Assign LF03=0] *** count
+[&Assign LF04=""] *** response
+
+[&Conflict word=LF01, type="ADMI", title="ACTION CANCELLED : A Global Administration entity already exists", button1="Cancel", button2="Open", list=LF02, count=LF03, response=LF04,nodisplay]
+[&If LF03=1]
+   [&Conflict word=LF01, type="ADMI", title="ACTION CANCELLED : A Global Administration entity already exists", button1="Cancel", button2="Open", list=LF02, count=LF03, response=LF04]
+[&EndIf]
+
+
+[&If LF03>0]
+   [&If LF04="button2"]
+      [&SelectEntity int-code=LF02, ref="myADMI"][&Message status(selectentity)]
+      [&With myADMI]
+         [&Open]
+         [&Quit]
+      [&EndWith]
+   [&Else]
+      [&If LF04="button1"]
+         [&Quit]
+      [&EndIf]
+   [&EndIf] 
+[&Else]
+   [&Open]
+[&EndIf]
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:

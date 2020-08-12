@@ -1,0 +1,82 @@
+********************************************************************************
+***  Script Code : S-USR-FINDUSER
+***  Description : Search for User ID
+***
+***  Created By  : John Wheeler On 27/02/19 @ 13:37:59
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&Assign LF01=""] list name
+[&Assign LF02=""] field code
+[&Assign LF03=""] users in field
+[&Assign LF04=""] new user
+
+[&Assign LF01=USR09]
+
+[&If LF01="Admin"]
+   [&Assign LF02="USR01"]
+   [&Assign LF03=USR01]
+[&Else]
+   [&If LF01="Duplicate claims"]   
+      [&Assign LF02="USR05"]
+      [&Assign LF03=USR05]
+   [&Else]
+      [&If LF01="Total Loss"]  
+         [&Assign LF02="USR06"]
+         [&Assign LF03=USR06]
+      [&Else]
+         [&If LF01="LRE"]  
+            [&Assign LF02="USR07"]
+            [&Assign LF03=USR07]
+         [&Else]
+            [&If LF01="AVL"]
+               [&Assign LF02="USR08"]
+               [&Assign LF03=USR08]
+            [&Else]
+               [&If LF01="Large Loss"]
+                  [&Assign LF02="USR10"]
+                  [&Assign LF03=USR10]
+               [&Else]
+                  [&If LF01="Finance"]
+                     [&Assign LF02="USR11"]
+                     [&Assign LF03=USR11]
+                  [&Else]
+                     [&If LF01="EOD admin"]
+                        [&Assign LF02="USR12"]
+                        [&Assign LF03=USR12]
+                     [&Else]
+                        [&If LF01="ME Admin"]
+                           [&Assign LF02="USR13"]
+                           [&Assign LF03=USR13]
+                        [&EndIf]
+                     [&EndIf]   
+                  [&EndIf]
+               [&EndIf]
+            [&EndIf]   
+         [&EndIf] 
+      [&EndIf] 
+   [&EndIf]
+[&EndIf]
+
+[&If LF01<>""]
+   [&If US01 &IsOneOf LF03 &Or US09<800]
+      [&CreateEntity type="TOOL",ref="myTOOL"]
+      [&With myTOOL]
+         [&Show ULS,title="Pick User"]
+         [&Assign LF04=ULS01(US01)]
+      [&EndWith]
+   [&Else]
+      [&Message "You do not have permission to edit "+LF01+" List!"]
+      [&Quit]
+   [&EndIf]   
+[&EndIf]
+
+[&Assign PO01=LF01]
+[&Assign PO02=LF02]
+[&Assign PO03=LF03]
+[&Assign PO04=LF04]
+********************************************************************************
+***   End of Script
+********************************************************************************

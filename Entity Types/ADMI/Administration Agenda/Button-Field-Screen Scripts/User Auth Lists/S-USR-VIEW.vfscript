@@ -1,0 +1,22 @@
+********************************************************************************
+***  Script Code : S-USR-VIEW
+***  Description : USR onview script
+***
+***  Created By  : John Wheeler On 27/02/19 @ 14:18:47
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&If US09<849]
+   [&Field code="USR",attribute="read-only",value="Yes"]
+   [&Field code="USR09",attribute="read-only",value="No"]
+   [&Field code="USRtext01",attribute="read-only",value="No"]
+   [&Field code="USRtext02",attribute="read-only",value="No"]
+[&EndIf]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

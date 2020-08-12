@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VFScreenType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <screen_code>ENTITY-TYPE;ADMI,RIS</screen_code>
+  <description>Repairs Settings</description>
+  <entry_order>R,1,2,3,4,5,6,7,8,9</entry_order>
+  <index_fields>,</index_fields>
+  <owner_type>ENTITY-TYPE;ADMI</owner_type>
+  <view_script />
+  <hide_script />
+  <text_screen>no</text_screen>
+  <field_amend>0</field_amend>
+  <view_authority>900</view_authority>
+  <amend_authority>900</amend_authority>
+  <boxes>3.76,1.8,126,15.33,6|^|1.3,2.2,58.8,6.6,6</boxes>
+  <headers>Audatex,1.6,3.4,10.8,1.0,1,6,0,</headers>
+  <Fields>
+    <field_info fld_number="1">
+      <amend_authority>0</amend_authority>
+      <description>Company Code</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>3</row>
+      <length>60</length>
+      <column>28.6</column>
+      <width>28.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="2">
+      <amend_authority>0</amend_authority>
+      <description>User</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>4.14</row>
+      <length>60</length>
+      <column>28.6</column>
+      <width>28.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="3">
+      <amend_authority>0</amend_authority>
+      <description>Password</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>5.29</row>
+      <length>60</length>
+      <column>28.6</column>
+      <width>28.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="4">
+      <amend_authority>0</amend_authority>
+      <description>NARG Audatex ToLocation</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>6.43</row>
+      <length>60</length>
+      <column>39.4</column>
+      <width>18</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="5">
+      <amend_authority>0</amend_authority>
+      <description>ME Notification of NARG Instr</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>8.43</row>
+      <length>100</length>
+      <column>33.4</column>
+      <width>57.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="6">
+      <amend_authority>0</amend_authority>
+      <description>ME Notification of COPART Instr</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>9.57</row>
+      <length>100</length>
+      <column>33.4</column>
+      <width>57.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="7">
+      <amend_authority>0</amend_authority>
+      <description>ME Notify if liability is changed</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>10.71</row>
+      <length>300</length>
+      <column>33.4</column>
+      <width>57.6</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="8">
+      <amend_authority>0</amend_authority>
+      <description>RoadRunners EN56</description>
+      <default_value>"0"</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,WHOLE</options>
+      <type>N</type>
+      <selection_list />
+      <row>11.86</row>
+      <length>15</length>
+      <column>33.4</column>
+      <width>15</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="9">
+      <amend_authority>0</amend_authority>
+      <description>Just Drive Referal Email address</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,6,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>13.29</row>
+      <length>120</length>
+      <column>33.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+  </Fields>
+</VFScreenType>

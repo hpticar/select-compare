@@ -1,0 +1,42 @@
+********************************************************************************
+***  Script Code : S-USR-REMOVE
+***  Description : Remove User from a USR list
+***
+***  Created By  : John Wheeler On 21/02/18 @ 13:14:35
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&Assign LF01=""] list name
+[&Assign LF02=""] field code
+[&Assign LF03=""] users in field
+[&Assign LF04=""] new user
+
+[&Call S-USR-FINDUSER,output=LF01,output=LF02,output=LF03,output=LF04]
+
+[&If LF04=US01]
+   [&Message "You are unable to add or remove yourself!"]
+[&Else]
+   [&If LF03 &Contains LF04]
+      [&If LF03=LF04]
+         [&FieldValue LF02=""]
+      [&Else]
+         [&Assign LF05=locate(LF04,text=LF03,delimiter=",")]
+         [&If LF05=1]
+            [&Assign LF04=LF04+","]
+         [&Else]
+            [&Assign LF04=","+LF04]
+         [&EndIf]      
+         [&Assign LF03=replace(LF03,from=LF04,to="")]
+         [&FieldValue LF02=LF03]      
+      [&EndIf]
+   [&Else]
+      [&Message "User is not in the "+LF01+" list"] 
+   [&EndIf]
+[&EndIf]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************

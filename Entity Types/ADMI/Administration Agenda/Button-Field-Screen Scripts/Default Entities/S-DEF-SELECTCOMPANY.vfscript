@@ -1,0 +1,65 @@
+********************************************************************************
+***  Script: S-DEF-SELECTCOMPANY                                             ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: AC On 26/01/07                                              ***
+********************************************************************************
+
+[&Assign LF01=""]                                                                                                     ** Search String
+[&Assign LF02=0]                                                                                                      ** Stores result from conflict
+[&Assign LF03=""]                                                                                                     ** Stores response from conflict
+                                                                                                   
+[&SelectRelation relation-field=DEF08, ref="myCOMP"]                                                                  **Select the Estate Agent relation 
+
+[&If status(selectrelation)<>""]                                                                                      ** No Other Correspondent has been selected                                                                                   ** Prompt user for search string
+   [&UserInput prompt="Search for...",result=LF01]
+   [&Conflict word=LF01,button1="Cancel",button2="Select",button3="New Commercial",default=2,title="Records matching: "+LF01,type="COMM",list=LF02,response=LF03]
+[&Else]   
+   [&UserInput prompt="Select action...",choices="Open:Change selection:Clear selection:Cancel",result=LF01]
+   [&If LF01="Open"]                                                                                                  ** Open Other Correspondent Record
+      [&With myCOMP]
+         [&Open]
+      [&EndWith]
+      [&Quit]                                                                                                         ** Quit to avoid running into conflict below
+   [&Else]
+      [&If LF01="Change Selection"]                                                                                         
+         [&UserInput prompt="Search for...",result=LF01]                                                                              ** Prompt user for search string
+         [&Conflict word=LF01,button1="Cancel",button2="Select",button3="New Commercial",default=2,title="Records matching: "+LF01,type="COMM",list=LF02,response=LF03]
+      [&Else]
+         [&If LF01="Clear selection"]                                                                                 ** Remove OP from matter
+            [&DeleteRelation relation-field=DEF08]    
+         [&EndIf]
+         [&Quit]
+      [&EndIf]
+   [&EndIf]
+[&EndIf]
+         
+[&If LF03="BUTTON2" &Or LF03="GO"]                                                                                   ** Select the highlighted OTHERCORRESPONDENT 
+   [&SelectEntity int-code=LF02,ref="myCOMP"]                                                               
+      [&With myCOMP]
+         [&CreateRole type="COMPANY"]
+      [&EndWith]
+      [&DeleteRelation relation-field=DEF08]
+      [&CreateRelation relation-field=DEF08,to-ref="myCOMP"]                                                         ** Create the relation from the file to the COMMercial via the OTHERCORRESPONDENT role
+[&Else]
+   [&If LF03="BUTTON3"]                                                                                              ** Add a new commercial OP
+         [&CreateEntity type="COMM",ref="myCOMM"]
+         [&With myCOMM]
+            [&CreateRole type="COMPANY"]
+            [&SelectRelation type="PRINCIPALOFFI_OFFI",ref="myOFFI"]
+         [&EndWith]
+         [&DeleteRelation relation-field=DEF08]
+         [&CreateRelation relation-field=DEF08,to-ref="myCOMM"]
+
+         [&With myOFFI]
+            [&CreateRole type="OFFICE"]
+         [&EndWith]
+   [&EndIf]
+[&EndIf]
+
+
+
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:
+
+ 

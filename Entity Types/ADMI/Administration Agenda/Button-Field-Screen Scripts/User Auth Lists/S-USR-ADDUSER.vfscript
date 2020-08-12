@@ -1,0 +1,36 @@
+********************************************************************************
+***  Script Code : S-USR-ADDUSER
+***  Description : Add users to a USR list
+***
+***  Created By  : John Wheeler On 21/02/18 @ 11:24:19
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+[&Assign LF02=""] field code
+[&Assign LF03=""] users in field
+[&Assign LF04=""] new user
+
+[&Call S-USR-FINDUSER,output=LF01,output=LF02,output=LF03,output=LF04]
+
+[&If LF04=US01]
+   [&Message "You are unable to add or remove yourself!"]
+[&Else]
+   [&If LF03 &Contains LF04]
+      [&Message "User is already in the "+LF01+" list!"]
+   [&Else]
+      [&If LF04<>""]
+         [&If LF03=""]
+            [&FieldValue LF02=LF04]
+         [&Else]
+            [&Assign LF03=LF03+","+LF04]
+            [&FieldValue LF02=LF03]   
+         [&EndIf]
+      [&EndIf]   
+   [&EndIf]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

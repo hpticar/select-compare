@@ -1,0 +1,27 @@
+********************************************************************************
+***  Script Code : S-PEX-EDIT
+***  Description : Edit Branch entry
+***
+***  Created By  : Hrvoje Pticar On 13/05/14 @ 13:06:46
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&ForEach GR,GR04="Yes"]
+   [&Assign PEA01=GR02]
+   [&Assign PEA02=GR03]
+   [&Assign LF01=GR01:number] ID
+[&EndFor]
+
+[&Show PEA,title="Edit Entry",no-cancel]
+
+[&ForEach PEXG,PEX03=LF01]
+   [&Assign PEX01=PEA01]
+   [&Assign PEX02=PEA02]
+[&EndFor]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

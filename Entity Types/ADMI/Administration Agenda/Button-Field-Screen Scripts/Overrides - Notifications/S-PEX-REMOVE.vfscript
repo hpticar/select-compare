@@ -1,0 +1,27 @@
+********************************************************************************
+***  Script Code : S-PEX-REMOVE
+***  Description : Remove Branch from List
+***
+***  Created By  : Hrvoje Pticar On 13/05/14 @ 12:58:04
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Grid action="load",field="COV11"]
+
+[&ForEach GR,GR04="yes"]
+   [&Assign LF01=GR01:number]
+[&EndFor]
+
+[&ForEach PEXG,PEX03=LF01]
+   [&If prompt("Are you sure you want to delete entry for "+PEX01+"?")(question)="Yes"]
+      [&Delete PEXG]
+   [&EndIf]
+[&EndFor]
+
+[&Grid action="load",field="COV11"]
+********************************************************************************
+***   End of Script
+********************************************************************************

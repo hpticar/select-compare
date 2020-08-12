@@ -1,0 +1,41 @@
+********************************************************************************
+***  Script Code : S-PEX-ADD
+***  Description : Add New Branch to List
+***
+***  Created By  : Hrvoje Pticar On 13/05/14 @ 11:53:13
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Assign PEA01=""]
+[&Assign PEA02=""]
+
+[&Show PEA]
+
+[&Assign LF01=""]
+[&Assign LF02=0]
+[&ForEach PEXG]
+   [&If PEX01=PEA01]
+      [&Assign LF01="Exists"]
+   [&EndIf]
+   [&If PEX03>LF02]
+      [&Assign LF02=PEX03] adjust the ID to highest existing value
+   [&EndIf]
+[&EndFor]
+
+[&If LF01<>""]
+   [&Message "Branch already exists!"]
+[&Else]
+   [&Assign LF02=LF02+1] increase ID
+   [&Select PEXG:new]
+   [&Assign PEX01=PEA01]
+   [&Assign PEX02=PEA02]
+   [&Assign PEX03=LF02]
+[&EndIf]
+
+[&Grid action="load",field="COV11"]
+********************************************************************************
+***   End of Script
+********************************************************************************

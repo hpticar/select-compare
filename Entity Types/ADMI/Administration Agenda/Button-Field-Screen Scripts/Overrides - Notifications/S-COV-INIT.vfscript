@@ -1,0 +1,34 @@
+********************************************************************************
+***  Script Code : S-COV-INIT
+***  Description : Report after Expiry Grid Init Script (COV11)
+***
+***  Created By  : Hrvoje Pticar On 13/05/14 @ 11:41:55
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+[&Grid action="delete"]
+
+[&Grid action="create-col",name="ID",type="integer",format=">>>9",key,hidden]
+[&Grid action="create-col",name="Branch",type="char",format="x(35)",sort]
+[&Grid action="create-col",name="Send To",type="char",format="x(49)"]
+[&Grid action="create-col",name="Selected",type="char",format="x(3)",selected,hidden]
+
+[&Assign LF01=0]
+[&ForEach PEXG]
+   [&Grid action="create-row"]
+   [&Assign LF01=LF01+1]
+   [&Assign GR01=pex03]
+   [&Assign GR02=PEX01]
+   [&Assign GR03=PEX02]
+[&EndFor]
+
+[&If LF01=0]
+   [&Grid action="create-row"]
+[&EndIf]
+
+********************************************************************************
+***   End of Script
+********************************************************************************

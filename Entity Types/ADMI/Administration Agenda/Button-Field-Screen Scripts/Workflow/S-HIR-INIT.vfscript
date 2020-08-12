@@ -1,0 +1,39 @@
+********************************************************************************
+***  Script Code : S-HIR-INIT
+***  Description : Hire Rate Grid
+***
+***  Created By  : Oliver Funnell On 23/05/16 @ 13:39:12
+***
+***  Script Change Notes:
+***
+***
+********************************************************************************
+
+      ** Enter Script Description/Usage Info Here For Reference **
+
+** Assign Local Variables
+ &Assign LF100=""]                        ** First Variable
+ &Assign LF101=""]                        ** Second Variable
+
+
+
+[&Grid action="delete"]
+[&Grid action="create"]
+
+[&Grid action="create-col",name="Class",format="x(10)",type="char",key]           1
+[&Grid action="create-col",name="Cost",format=">,>>9.99",type="deci"]               2
+[&Grid action="create-col",name="Selected",format="x(10)",type="char",selected,hidden]   3
+[&Grid action="create-col",name="Example",format="x(30)",type="char"]               4
+
+
+[&ForEach GHIR,noincludeall]
+   [&Grid action="Create-row"]
+   [&Assign GR01=HIR01]
+   [&Assign GR02=HIR02]
+   [&Assign GR04=HIR03]
+[&EndFor]
+
+
+********************************************************************************
+***   End of Script
+********************************************************************************
