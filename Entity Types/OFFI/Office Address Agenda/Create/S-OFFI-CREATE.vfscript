@@ -1,0 +1,62 @@
+********************************************************************************
+***  Script: S-OFFI-CREATE                                                   ***
+***  Called By:                                                              ***
+***  Calls:                                                                  ***
+***  Created By: VF On 17/10/06                                              ***
+********************************************************************************
+
+[&If PI01:text <> "New-COMM"]
+   [&If PI01:text = "Head-OFFI"]
+      [&Assign DIN18="Yes"]
+   [&EndIf]
+
+   [&If PI01:text = "Reg-OFFI"]
+      [&Assign DIN19="Yes"]
+   [&EndIf]
+   [&Assign DIN01=PI02]
+   [&Assign DIN02=PI03]
+   [&Show DIN] 
+   [&Assign OFF01 = DIN01]      ** Trading Name
+   [&Assign OFF02 = DIN02]      ** Short Name
+   [&Assign OFF03 = DIN03]      ** DX Number
+   [&Assign OFF04 = DIN04]      ** Building Name
+   [&Assign OFF05 = DIN05]      ** Building Number
+   [&Assign OFF06 = DIN06]      ** Street Name
+   [&Assign OFF07 = DIN07]      ** Locality 
+   [&Assign OFF08 = DIN08]      ** Town   
+   [&Assign OFF09 = DIN09]      ** County
+   [&Assign OFF10 = DIN10]      ** Postcode
+   [&Assign OFF12 = DIN11]      ** DX Exchange
+   [&Assign CON01 = DIN13]      ** Alternative
+   [&Assign CON02 = DIN12]      ** Switchboard
+   [&Assign CON03 = DIN14]      ** Fax
+   [&Assign CON04 = DIN15]      ** Web Site 
+   [&Assign CON05 = DIN16]      ** Central Address
+   [&Assign CON06 = DIN17]      ** Email Format
+   
+   [&Call S-OFFEN-ASSIGN,input="Create",input=DIN01,input=DIN02,input=DIN04,input=DIN05,input=DIN06,input=DIN07,input=DIN08,input=DIN09,input=DIN10,input=DIN12,input=DIN13,input=DIN14]
+   [&Assign PO01=DIN18]      ** Ouptput the Head Office Check box from OFFI DIN screen
+   [&Assign PO02=DIN19]      ** Ouptput the Registered Office Check box from OFFI DIN screen
+[&Else]
+   [&Assign OFF01 = PI02]
+   [&Assign OFF02 = PI03] 
+   [&Assign OFF04 = PI04] 
+   [&Assign OFF05 = PI05] 
+   [&Assign OFF06 = PI06] 
+   [&Assign OFF07 = PI07] 
+   [&Assign OFF08 = PI08] 
+   [&Assign OFF09 = PI09] 
+   [&Assign OFF10 = PI10] 
+   [&Assign CON01 = PI11]
+   [&Assign CON02 = PI12]
+   [&Assign CON03 = PI13]
+   [&Assign CON04 = PI14]
+   [&Assign CON05 = PI15]
+   [&Assign CON06 = PI16]
+   [&Assign OFF03 = PI17]
+   [&Assign OFF12 = PI18]
+   [&Call S-OFFEN-ASSIGN,input=PI01,input=PI02,input=PI03,input=PI04,input=PI05,input=PI06,input=PI07,input=PI08,input=PI09,input=PI10,input=PI11,input=PI12,input=PI13]
+[&EndIf]
+*** AMENDMENTS *****************************************************************
+Amendment By:             Amendment:
+  

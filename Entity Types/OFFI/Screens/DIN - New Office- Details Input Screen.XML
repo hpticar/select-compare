@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VFScreenType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <screen_code>ENTITY-TYPE;OFFI,DIN</screen_code>
+  <description>New Office: Details Input Screen</description>
+  <entry_order>R,1,2,18,19,4,5,6,7,8,9,10,12,13,14,15,16,17,3,11,20</entry_order>
+  <index_fields>,</index_fields>
+  <owner_type>ENTITY-TYPE;OFFI</owner_type>
+  <view_script>S-DIN-VIEW</view_script>
+  <hide_script />
+  <text_screen>no</text_screen>
+  <field_amend>0</field_amend>
+  <view_authority>0</view_authority>
+  <amend_authority>0</amend_authority>
+  <boxes>3.38,1.6,126.4,15.48,15|^|6.4,1.8,79.6,10.3,15|^|1.2,1.8,79.6,5.1,15|^|28.2,1.8,79.6,4.2,15|^|16.8,1.8,79.6,5.6,15|^|22.5,1.8,79.6,5.5,15</boxes>
+  <headers>Address,6.7,3.0,9.6,1.0,1,15,0,|^|Office Details,1.5,3.0,14.6,1.0,1,15,0,|^|Document Exchange,28.5,3.0,22.0,1.0,?,15,0,|^|Telephone,17.3,3.0,27.2,1.0,1,15,0,|^|Internet,22.8,3.0,9.2,1.0,1,15,0,</headers>
+  <Fields>
+    <field_info fld_number="1">
+      <amend_authority>0</amend_authority>
+      <description>Trading Name</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>2.67</row>
+      <length>80</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="2">
+      <amend_authority>0</amend_authority>
+      <description>Short Name</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15</options>
+      <type>T</type>
+      <selection_list />
+      <row>3.81</row>
+      <length>20</length>
+      <column>19.4</column>
+      <width>30</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="3">
+      <amend_authority>950</amend_authority>
+      <description>Number</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>29.76</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="4">
+      <amend_authority>0</amend_authority>
+      <description>Building Name</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>7.86</row>
+      <length>100</length>
+      <column>19.4</column>
+      <width>30</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="5">
+      <amend_authority>0</amend_authority>
+      <description>Building Number</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>9.1</row>
+      <length>10</length>
+      <column>19.4</column>
+      <width>16.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="6">
+      <amend_authority>0</amend_authority>
+      <description>Street Name</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>10.33</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="7">
+      <amend_authority>0</amend_authority>
+      <description>Locality</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>11.57</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="8">
+      <amend_authority>0</amend_authority>
+      <description>Town</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>12.91</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="9">
+      <amend_authority>0</amend_authority>
+      <description>County</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>14.14</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="10">
+      <amend_authority>0</amend_authority>
+      <description>Postcode</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,CAPS,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>15.38</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>16.8</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="11">
+      <amend_authority>950</amend_authority>
+      <description>Exchange</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=</options>
+      <type>T</type>
+      <selection_list />
+      <row>31</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="12">
+      <amend_authority>0</amend_authority>
+      <description>Switchboard</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>18.52</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="13">
+      <amend_authority>0</amend_authority>
+      <description>Alternate</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>19.76</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="14">
+      <amend_authority>0</amend_authority>
+      <description>Fax</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>21</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="15">
+      <amend_authority>0</amend_authority>
+      <description>Web Site</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>24</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="16">
+      <amend_authority>0</amend_authority>
+      <description>Central Address</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>25.24</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="17">
+      <amend_authority>0</amend_authority>
+      <description>Email</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15,FCAT=,TRIMSPACES</options>
+      <type>T</type>
+      <selection_list />
+      <row>26.48</row>
+      <length>60</length>
+      <column>19.4</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="18">
+      <amend_authority>0</amend_authority>
+      <description>Head Office</description>
+      <default_value>No</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15</options>
+      <type>C</type>
+      <selection_list />
+      <row>5.05</row>
+      <length>3</length>
+      <column>19.4</column>
+      <width>3</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="19">
+      <amend_authority>0</amend_authority>
+      <description>Registered Office</description>
+      <default_value>No</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,1,L-BGCOLOR,15</options>
+      <type>C</type>
+      <selection_list />
+      <row>5.05</row>
+      <length>3</length>
+      <column>39.4</column>
+      <width>3</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="20">
+      <amend_authority>0</amend_authority>
+      <description>Postcode</description>
+      <default_value />
+      <options>L-FGCOLOR,0,L-BGCOLOR,8,PROCESS,DIN-POSTCODE</options>
+      <type>O</type>
+      <selection_list />
+      <row>15.38</row>
+      <length>0</length>
+      <column>37.8</column>
+      <width>22</width>
+      <pointer />
+    </field_info>
+  </Fields>
+</VFScreenType>

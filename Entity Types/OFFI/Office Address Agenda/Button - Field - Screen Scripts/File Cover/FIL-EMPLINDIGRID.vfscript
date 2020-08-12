@@ -1,0 +1,19 @@
+******************************************************************************
+*** Button Script: FIL-EMPLINDIGRID                                        ***
+*** Called By:                                                             ***
+*** Calls: COMM.FIL-EMPLINDIGRID                                           ***
+*** Created By: Matthew Dobing on  24/05/04                                ***
+******************************************************************************
+
+** Initialise the temporary variables to be used in this script
+[&Assign LF01=EN56:text]
+[&Assign LF02=OFFICEADD_COMM.EN56:text]
+
+[&SelectEntity type="COMM",int-code=LF02,ref="myCOMM"]
+[&With myCOMM]
+   [&Call FIL-EMPLINDIGRID,input=LF01]   ** Call a script on the COMM to show all employees of this office
+[&EndWith]
+
+*******AMENDMENTS*********************************************************************************
+Amended By: HW on 28/02/05		Amendment: Added Comments
+Amendment By:             Amendment:

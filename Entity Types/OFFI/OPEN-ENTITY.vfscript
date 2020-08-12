@@ -1,0 +1,11 @@
+// ITSS-PRB-000183 - AR - 08/09/2014 - HIDE THE DOCUMENT EXCHANGE SECTION
+[&Field code="OFF03",attribute="visible",value="no"]
+[&Field code="OFF12",attribute="visible",value="no"]
+[&Field code="OFFTEXT03",attribute="visible",value="no"]
+[&Field code="OFFRECT03",attribute="visible",value="no"]
+[&Field code="DIN03",attribute="visible",value="no"]
+[&Field code="DIN11",attribute="visible",value="no"]
+[&Field code="DINTEXT03",attribute="visible",value="no"]
+[&Field code="DINRECT03",attribute="visible",value="no"]
+// ITSS-PRB-000183 - AR - 08/09/2014 - HIDE THE DOCUMENT EXCHANGE SECTION
+

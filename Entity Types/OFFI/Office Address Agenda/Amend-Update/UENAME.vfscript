@@ -1,0 +1,106 @@
+******************************************************************************
+*** Called Script: UENAME                                                  ***
+*** Called By: Create Entity, OFF-HIDE                                     ***
+*** Calls:                                                                 ***
+*** Created By: Matthew Dobing on 13/05/04                                 ***
+******************************************************************************
+
+PI01 = "Create"   ** Will contain Create if called during creation
+PI02 = OFF01      ** Trading Name
+PI03 = OFF02      ** Short Name
+PI04 = OFF04      ** Building Name
+PI05 = OFF05      ** Building Number
+PI06 = OFF06      ** Street Name
+PI07 = OFF07      ** Locality
+PI08 = OFF08      ** Town
+PI09 = OFF09      ** County
+PI10 = OFF10      ** Postcode
+PI11 = CON01      ** Alternative
+PI12 = CON02      ** Switchboard
+PI13 = CON03      ** Fax
+
+** Check OFFIce name
+
+[&If PI01 <> "Create"]
+   [&Assign PI02 = OFF01]      ** Trading name
+   [&Assign PI03 = OFF02]      ** Short name
+   [&Assign PI04 = OFF04]      ** Building name
+   [&Assign PI05 = OFF05]      ** Building number
+   [&Assign PI06 = OFF06]      ** Street name
+   [&Assign PI07 = OFF07]      ** Locality
+   [&Assign PI08 = OFF08]      ** Town
+   [&Assign PI09 = OFF09]      ** County
+   [&Assign PI10 = OFF10]      ** Postcode
+   [&Assign PI11 = CON01]      ** Alternative
+   [&Assign PI12 = CON02]      ** Switchboard
+   [&Assign PI13 = CON03]      ** Fax
+[&EndIf]
+
+[&Assign OFF01 = PI02]      ** Assign OFFIce name to name of atached COMMercial
+[&Assign OFF11 = PI02]       ** Set the full name of this OFFIce
+
+** Reset fields
+[&Assign OFF13 = ""]
+[&Assign OFF14 = ""]
+
+[&If PI04 <> ""]
+   [&Assign OFF13 = PI04 + "<CR>"]
+   [&Assign OFF14 = PI04 + ", "]
+   [&Assign EN34 = PI04 + ", "]
+[&EndIf]
+
+[&If PI05 <> ""]
+   [&Assign OFF13 = OFF13 + PI05 + " "]
+   [&Assign OFF14 = OFF14 + PI05 + " "]
+   [&Assign EN34 = PI05 + " "]
+[&EndIf]
+
+[&If PI06 <> ""]
+   [&Assign OFF13 = OFF13 + PI06 + "<CR>"]
+   [&Assign OFF14 = OFF14 + PI06 + ", "]
+   [&Assign EN34 = PI06 + ", "]
+[&EndIf]
+
+[&If PI07 <> ""]
+   [&Assign OFF13 = OFF13 + PI07 + "<CR>"]
+   [&Assign OFF14 = OFF14 + PI07 + ", "]
+[&EndIf]
+
+[&If PI08 <> ""]
+   [&Assign OFF13 = OFF13 + PI08 + "<CR>"]
+   [&Assign OFF14 = OFF14 + PI08 + ", "]
+[&EndIf]
+
+[&If PI09 <> ""]
+   [&Assign OFF13 = OFF13 + PI09 + "<CR>"]
+   [&Assign OFF14 = OFF14 + PI09 + ", "]
+[&EndIf]
+
+[&Assign OFF14 = OFF14:rtrim(", ")]
+[&Assign OFF14 = OFF14 + ". "]
+[&If PI10 <> ""]
+   [&Assign OFF13 = OFF13 + PI10]
+   [&Assign OFF14 = OFF14 + PI10]
+[&EndIf]
+
+** Assign entity codes
+[&Assign EN02 = PI02 + ": " + OFF14]
+[&Assign EN04 = PI03]
+[&Assign EN35 = PI07]
+[&Assign EN36 = PI08]
+[&Assign EN37 = PI09]
+[&Assign EN38 = PI10]
+[&Assign EN47 = PI12]
+[&Assign EN48 = PI11]
+[&Assign EN49 = PI13]
+
+** If updating Office Address, send updates to Comm via uename
+[&If  PI01 <> "Create"]
+   [&SelectRelation type="PRINCIPALOFFI_COMM",ref="myCOMM"]
+   [&With myCOMM]
+      [&Call UENAME]
+   [&EndWith]
+[&EndIf]
+*******AMENDMENTS*********************************************************************************
+Amended By: JW on 15/10/07    Amendment: Removed comma from after Building number
+Amended By: AT on 16/10/07    Amendment: Added UENAME call to update comm entity
