@@ -2,7 +2,7 @@
 <VFScreenType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <screen_code>ENTITY-TYPE;ADMI,USR</screen_code>
   <description>User Auth Lists</description>
-  <entry_order>R,9,1,2,3,4,5,6,7,8,10,11,12,13</entry_order>
+  <entry_order>R,9,1,2,3,4,5,6,7,8,10,11,12,13,14</entry_order>
   <index_fields>,</index_fields>
   <owner_type>ENTITY-TYPE;ADMI</owner_type>
   <view_script>S-USR-VIEW</view_script>
@@ -11,7 +11,7 @@
   <field_amend>0</field_amend>
   <view_authority>0</view_authority>
   <amend_authority>500</amend_authority>
-  <boxes>3.76,1.8,126,15.33,15|^|1.3,2.2,86.4,18.9,16</boxes>
+  <boxes>3.76,1.8,126,15.33,15|^|1.3,2.2,86.4,23.7,16</boxes>
   <headers>Add User,3.0,33.4,10.8,1.0,1,16,0,S-USR-ADDUSER|^|Remove User,3.0,50.2,14.8,1.0,1,16,0,S-USR-REMOVE</headers>
   <Fields>
     <field_info fld_number="1">
@@ -179,6 +179,19 @@
       <selection_list />
       <row>18.71</row>
       <length>500</length>
+      <column>26.2</column>
+      <width>60</width>
+      <pointer />
+    </field_info>
+    <field_info fld_number="14">
+      <amend_authority>0</amend_authority>
+      <description>New Claim Load Users</description>
+      <default_value>""</default_value>
+      <options>FONT,?,FGCOLOR,0,BGCOLOR,15,L-FONT,?,L-FGCOLOR,0,L-BGCOLOR,16,HEIGHT,4.9,ACTUALHEIGHT,MAXCHARS,0</options>
+      <type>X</type>
+      <selection_list />
+      <row>19.86</row>
+      <length>60</length>
       <column>26.2</column>
       <width>60</width>
       <pointer />
